@@ -1151,22 +1151,26 @@ reg delete "HKCU\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\m
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\microsoft-edge-holographic" /f
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\ms-eyecontrolspeech" /f
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\ms-xbl-3d8b930f" /f
-C:\TEMP\SetUserFTA.exe C:\TEMP\SetUserFTA.txt
-C:\TEMP\SetUserFTA.exe del microsoft-edge
-C:\TEMP\SetUserFTA.exe del microsoft-edge-holographic
-C:\TEMP\SetUserFTA.exe del ms-xbl-3d8b930f
-C:\TEMP\SetUserFTA.exe del .microsoft-edge
 powershell -noprofile -executionpolicy bypass -command "Disable-MMAgent -MemoryCompression"
 powershell -noprofile -executionpolicy bypass -command "Disable-MMAgent -PageCombining"
 powershell -noprofile -executionpolicy bypass -command "Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'Registry::HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration' -Depth 3 -Recurse | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'Scaling' -Type 'DWord' -Value '2' -Force}"
 powershell -noprofile -executionpolicy bypass -command "set-ItemProperty HKLM:\System\CurrentControlSet\services\NetBT\Parameters\Interfaces\tcpip* -Name NetbiosOptions -Value 2"
+C:\TEMP\SetUserFTA.exe C:\TEMP\SetUserFTA.txt
+C:\TEMP\SetUserFTA.exe del microsoft-edge
+C:\TEMP\SetUserFTA.exe del microsoft-edge-holographic
+C:\TEMP\SetUserFTA.exe del ms-xbl-3d8b930f
+C:\TEMP\SetUserFTA.exe del .microsoft-edge
+C:\TEMP\svcl.exe /SetVolume "扬声器" 100
+C:\TEMP\svcl.exe /SetAllowExclusive "扬声器" 0
+C:\TEMP\svcl.exe /SetExclusivePriority "扬声器" 0
+C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 48000
+start /b C:\TEMP\IDMcrack.exe
 move "C:\TEMP\LowAudioLatency.lnk" "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\"
 move "C:\TEMP\SetTimerResolution.lnk" "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\"
 move "C:\TEMP\StartUp.lnk" "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\"
 rmdir /s /q "C:\AMD"
 rmdir /s /q "C:\DRV"
-start /b C:\TEMP\IDMcrack.exe
 for %%a in (
     "AllowIdleIrpInD3",
     "D3ColdSupported",
