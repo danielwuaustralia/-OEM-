@@ -10,6 +10,13 @@ C:\Tools\PowerRun.exe /SW:0 cmd /c taskkill /f /im ctfmon.exe
 C:\Tools\PowerRun.exe /SW:0 cmd /c del /f /q "C:\Windows\System32\ctfmon.exe"
 C:\Tools\PowerRun.exe /SW:0 cmd /c taskkill /f /im ChsIME.exe
 C:\Tools\PowerRun.exe /SW:0 cmd /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
+C:\Tools\PowerRun.exe /SW:0 cmd /c taskkill /f /im SppExtComObj.Exe
+C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Steam\dumps"
+C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Steam\appcache"
+C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Windows\Logs"
+C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\WebCache"
+C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Windows\System32\LogFiles"
+C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer"
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
 powershell -noprofile -executionpolicy bypass -command "Set-NetIPInterface -AddressFamily IPv6 -Advertising Disabled -Dhcp Disabled"
 powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice | Where-Object Status -eq Unknown | ForEach-Object { &pnputil /remove-device $_.InstanceId }"
