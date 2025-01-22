@@ -227,6 +227,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdwps" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdi2c" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AmdPpkgSvc" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\AmdPpkg" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AMDPCIDev" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
@@ -496,8 +497,6 @@ ren "C:\Windows\System32\mcupdate_GenuineIntel.dll" mcupdate_GenuineIntel_old.dl
 ren "C:\Windows\System32\mcupdate_AuthenticAMD_old.dll" mcupdate_GenuineIntel.dll
 ren "C:\Windows\System32\mcupdate_GenuineIntel_old.dll" mcupdate_AuthenticAMD.dll
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "4" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaStorAVC\Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdsbs\Settings\CAM" /v "EnableHIPM" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdsbs\Settings\CAM" /v "EnableDIPM" /t REG_DWORD /d "0" /f
@@ -508,8 +507,11 @@ rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeCore"
 rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
 rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
 rmdir /s /q "C:\Windows\Installer"
+rmdir /s /q "C:\Windows\System32\catroot2"
+rmdir /s /q "C:\ProgramData\Microsoft\Diagnosis\ETLLogs"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender"
+rmdir /s /q "C:\Windows\System32\sru"
 reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Gaming.GameBar.PresenceServer.Internal.PresenceWriter" /v "ActivationType" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\ValueBanner.IdealStateFeatureControlProvider" /v "ActivationType" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "EnableLog" /t REG_DWORD /d "0" /f
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio -Recurse -Include FxProperties | Where-Object {$_.PSIsContainer} | ForEach-Object {Remove-Item -Path $_.PSPath -Recurse -Force} -Verbose"
@@ -517,7 +519,7 @@ powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice -FriendlyN
 powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice -FriendlyName '高精度事件计时器' | Disable-PnpDevice -Confirm:$false -Verbose"
 powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice -FriendlyName 'Generic Bluetooth Adapter' | Disable-PnpDevice -Confirm:$false -Verbose"
 powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice -FriendlyName 'AMD PSP 11.0 Device' | Disable-PnpDevice -Confirm:$false -Verbose"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\EventLog-System" /v "Start" /t REG_DWORD /d "1" /f
 for /f "delims=" %%d in ('powershell -noprofile -c "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase' | Select-Object -ExpandProperty Name | %% { $pathSplit = $_.Split('\'); $displayName = $pathSplit[$pathSplit.Length - 1]; $displayNameSplit = $displayName.Split('_'); if ($displayNameSplit.Length -eq 4) { return $displayName } }"') do (
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase\%%d" /v "DitherRegistryKey" /t REG_BINARY /d "db0100001000000002010104f4000000" /f )
