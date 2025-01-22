@@ -48,11 +48,10 @@ reg delete "HKCR\Directory\shellex\ContextMenuHandlers\EPP" /f
 reg delete "HKCR\Drive\shellex\ContextMenuHandlers\EPP" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
-rd /s /q "C:\Program Files\Windows Defender"
-rd /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
-rd /s /q "C:\ProgramData\Microsoft\Windows Defender"
-rd /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
-rd /s /q "C:\ProgramData\Microsoft\Windows Security Health"
+rmdir /s /q "C:\Program Files\Windows Defender"
+rmdir /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows Security Health"
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
