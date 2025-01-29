@@ -497,20 +497,16 @@ ren "C:\Windows\System32\mcupdate_GenuineIntel.dll" mcupdate_GenuineIntel_old.dl
 ren "C:\Windows\System32\mcupdate_AuthenticAMD_old.dll" mcupdate_GenuineIntel.dll
 ren "C:\Windows\System32\mcupdate_GenuineIntel_old.dll" mcupdate_AuthenticAMD.dll
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaStorAVC\Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdsbs\Settings\CAM" /v "EnableHIPM" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdsbs\Settings\CAM" /v "EnableDIPM" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\amdsbs\Settings\CAM" /v "EnableHDDParking" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\devmap.inf_amd64_1993197f4612e967\Configurations\devmap_Install\Services\devmap\Parameters" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
-rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeCore"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
-rmdir /s /q "C:\Windows\Installer"
-rmdir /s /q "C:\Windows\System32\catroot2"
-rmdir /s /q "C:\ProgramData\Microsoft\Diagnosis\ETLLogs"
-rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender"
-rmdir /s /q "C:\Windows\System32\sru"
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "4" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{5BBC2C71-DEC2-4BA3-961A-36F37D1CC8A5}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{73FB9979-623F-41A6-BF1C-BA817C519C4F}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{7BF2A436-2A30-4797-90EE-0F66B8426D75}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{7ECEAD6D-6452-4DED-B567-7BB9947D7669}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{F82EFF51-99FA-4393-A31D-6D5D9F3972C3}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{FED4ACC3-87C9-45E9-A026-5B59A855E687}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{0FA53099-5317-46AF-9376-9A04A4B550F9}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_C:\Windows\System32\audioeng.dll" /f
 reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Gaming.GameBar.PresenceServer.Internal.PresenceWriter" /v "ActivationType" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "EnableLog" /t REG_DWORD /d "0" /f
@@ -526,9 +522,19 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase\%
 for /f "usebackq tokens=1*" %%a in (`reg query "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger" /s /f "Enabled"^| findstr "HKEY"`) do reg add "%%a %%b" /v "Enabled" /t REG_DWORD /d "0" /f
 for /f "usebackq tokens=1*" %%a in (`reg query "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger" /s /f "Start"^| findstr "HKEY"`) do reg add "%%a %%b" /v "Start" /t REG_DWORD /d "0" /f
 for /f "usebackq tokens=1*" %%a in (`reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT" /s /f "Enabled"^| findstr "HKEY"`) do reg add "%%a %%b" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\devmap.inf_amd64_1993197f4612e967\Configurations\devmap_Install\Services\devmap\Parameters" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
 for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /f "DmaRemappingCompatible" ^| find /i "Services\" ') do (
     reg add "%%a" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
 )
+rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge"
+rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeCore"
+rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
+rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
+rmdir /s /q "C:\Windows\Installer"
+rmdir /s /q "C:\Windows\System32\catroot2"
+rmdir /s /q "C:\ProgramData\Microsoft\Diagnosis\ETLLogs"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender"
+rmdir /s /q "C:\Windows\System32\sru"
 
 :: for /f "skip=2 tokens=2,*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Flighting\Build" /v OSVersion') do (set OSVersion=%%B)
 :: taskkill /f /im TiWorker.exe
