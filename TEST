@@ -1,0 +1,32 @@
+Set-NetTCPSetting -SettingName "Internet" -MinRtoMs 200
+Set-NetTCPSetting -SettingName "Internet" -InitialCongestionWindowMSS 32
+Set-NetTCPSetting -SettingName "Internet" -CwndRestart $false
+Set-NetTCPSetting -SettingName "Internet" -DelayedAckTimeoutMs 20
+Set-NetTCPSetting -SettingName "Internet" -DelayedAckFrequency
+Set-NetTCPSetting -SettingName "Internet" -EcnCapability Enabled
+Set-NetTCPSetting -SettingName "Internet" -Timestamps Allowed
+Set-NetTCPSetting -SettingName "Internet" -InitialRtoMs 500
+Set-NetTCPSetting -SettingName "Internet" -ScalingHeuristics Enabled
+Set-NetTCPSetting -SettingName "Internet" -MaxSynRetransmissions 2
+Set-NetTCPSetting -SettingName "Internet" -AutoTuningLevelLocal Experimental
+Set-NetTCPSetting -SettingName "Internet" -MemoryPressureProtection Disabled
+
+Set-NetTCPSetting -SettingName "Datacenter" -MinRtoMs 200
+Set-NetTCPSetting -SettingName "Datacenter" -InitialCongestionWindowMSS 32
+Set-NetTCPSetting -SettingName "Datacenter" -CwndRestart $false
+Set-NetTCPSetting -SettingName "Datacenter" -DelayedAckTimeoutMs 20
+Set-NetTCPSetting -SettingName "Datacenter" -DelayedAckFrequency
+Set-NetTCPSetting -SettingName "Datacenter" -EcnCapability Enabled
+Set-NetTCPSetting -SettingName "Datacenter" -Timestamps Allowed
+Set-NetTCPSetting -SettingName "Datacenter" -InitialRtoMs 500
+Set-NetTCPSetting -SettingName "Datacenter" -ScalingHeuristics Enabled
+Set-NetTCPSetting -SettingName "Datacenter" -MaxSynRetransmissions 2
+Set-NetTCPSetting -SettingName "Datacenter" -AutoTuningLevelLocal Experimental
+Set-NetTCPSetting -SettingName "Datacenter" -MemoryPressureProtection Disabled
+
+Set-NetOffloadGlobalSetting -ReceiveSideScaling $true
+Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing $true
+Set-NetOffloadGlobalSetting -TaskOffload $true
+Set-NetOffloadGlobalSetting -NetworkDirect $true
+Set-NetOffloadGlobalSetting -NetworkDirectAcrossIPSubnets $true
+Set-NetOffloadGlobalSetting -PacketCoalescingFilter $true
