@@ -7,8 +7,8 @@ Set-NetTCPSetting -SettingName 'Internet' -Timestamps Allowed
 Set-NetTCPSetting -SettingName 'Internet' -InitialRtoMs 750
 Set-NetTCPSetting -SettingName 'Internet' -ScalingHeuristics Enabled
 Set-NetTCPSetting -SettingName 'Internet' -MaxSynRetransmissions 3
-Set-NetTCPSetting -SettingName 'Internet' -AutoTuningLevelLocal b
-Set-NetTCPSetting -SettingName 'Internet' -MemoryPressureProtection Normal
+Set-NetTCPSetting -SettingName 'Internet' -AutoTuningLevelLocal Normal
+Set-NetTCPSetting -SettingName 'Internet' -MemoryPressureProtection Disabled
 
 Set-NetTCPSetting -SettingName 'Datacenter' -MinRtoMs 150
 Set-NetTCPSetting -SettingName 'Datacenter' -InitialCongestionWindowMSS 16
@@ -19,8 +19,8 @@ Set-NetTCPSetting -SettingName 'Datacenter' -Timestamps Allowed
 Set-NetTCPSetting -SettingName 'Datacenter' -InitialRtoMs 750
 Set-NetTCPSetting -SettingName 'Datacenter' -ScalingHeuristics Enabled
 Set-NetTCPSetting -SettingName 'Datacenter' -MaxSynRetransmissions 3
-Set-NetTCPSetting -SettingName 'Datacenter' -AutoTuningLevelLocal b
-Set-NetTCPSetting -SettingName 'Datacenter' -MemoryPressureProtection Normal
+Set-NetTCPSetting -SettingName 'Datacenter' -AutoTuningLevelLocal Normal
+Set-NetTCPSetting -SettingName 'Datacenter' -MemoryPressureProtection Disabled
 
 Set-NetOffloadGlobalSetting -ReceiveSideScaling Enabled
 Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing Enabled
