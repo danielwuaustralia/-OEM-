@@ -1,4 +1,5 @@
 @echo on
+color 0a
 
 powershell -noprofile -executionpolicy bypass -command "Get-WindowsCapability -Online | Where-Object Name -like *App.StepsRecorder* | Remove-WindowsCapability -Online"
 powershell -noprofile -executionpolicy bypass -command "Get-WindowsCapability -Online | Where-Object Name -like *AzureArcSetup* | Remove-WindowsCapability -Online"
@@ -59,12 +60,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\WlanSvc" /v "Start" /t REG_DWORD
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Allow" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged" /v "Value" /t REG_SZ /d "Deny" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "ShowGlobalPrompts" /t REG_DWORD /d "0" /f
-powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -DisplayName 'Wake on Magic Packet' -DisplayValue '禁用'"
-powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -DisplayName 'Wake on Pattern Match' -DisplayValue '禁用'"
-powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -DisplayName 'Preferred Band' -DisplayValue '1. No Preference'"
-powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -DisplayName 'MAC Randomization' -DisplayValue '禁用'"
-powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -DisplayName '2.4G无线模式' -DisplayValue '禁用'"
-powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -DisplayName '6GHz Band' -DisplayValue 'Enabled'"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 8192 8192" /f
+powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -RegistryKeyword 'PreferBand' -RegistryValue '3'"
+powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -RegistryKeyword 'RegROAMSensitiveLevel' -RegistryValue '80'"
+powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -RegistryKeyword 'SupportMACRandom' -RegistryValue '0'"
+powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -RegistryKeyword '*WakeOnMagicPacket' -RegistryValue '0'"
+powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name 'WLAN' -RegistryKeyword '*WakeOnPattern' -RegistryValue '0'"
 netsh wlan add profile filename="C:\TEMP\WiFi.xml" user=all
 netsh wlan set profileparameter name="LV426" connectionmode=auto
 netsh wlan connect name=LV426
@@ -74,6 +75,7 @@ rem ============================================================================
 start /b /w C:\TEMP\UpdateTime.exe /U /M
 start /b /w C:\TEMP\HEU.exe /smart
 compact /compactos:never
+start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
 start /b /w C:\Tools\PowerRun.exe
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "1" /t REG_SZ /d "C:\TEMP\Setup2.cmd" /f
 shutdown /r /t 5
