@@ -1,22 +1,25 @@
 @echo off
 
 start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\TEMP"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Users\Administrator\AppData\LocalLow\NVIDIA\PerDriverVersion\DXCache"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c taskkill /f /im ctfmon.exe
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c del /f /q "C:\Windows\System32\ctfmon.exe"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c taskkill /f /im ChsIME.exe
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Windows\Logs"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\WebCache"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Windows\System32\LogFiles"
-start /b /w C:\Tools\PowerRun.exe /SW:0 cmd /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\TEMP"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\LocalLow\NVIDIA\PerDriverVersion\DXCache"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c taskkill /f /im ctfmon.exe
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c del /f /q "C:\Windows\System32\ctfmon.exe"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c taskkill /f /im ChsIME.exe
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Windows\Logs"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\WebCache"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Windows\System32\LogFiles"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer"
 start /b /w cmd /c taskkill /f /im SppExtComObj.Exe
-powershell -noprofile -executionpolicy bypass -command "Start-Service -Name 'stornvmeofi'"
-powershell -noprofile -executionpolicy bypass -command "Stop-Service -Name 'DeviceAssociationService' -Force"
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
-powershell -noprofile -executionpolicy bypass -command "C:\Tools\StartUp.ps1"
+powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice -Class @('USB', 'Mouse', 'Keyboard') | Where Status -eq Unknown | ForEach { &pnputil /remove-device $_.InstanceId }"
+powershell -noprofile -executionpolicy bypass -command "Clear-DnsClientCache"
+net start stornvmeofi
+net stop camsvc /y
+net stop sppsvc /y
+net stop DeviceAssociationService /y
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WmiApRpl\Performance" /v "Disable Performance Counters" /t REG_DWORD /d "1" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\BranchCache" /v "StateFlags0001" /f
@@ -82,4 +85,3 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Wi
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Windows Reset Log Files" /v "StateFlags0001" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Windows Upgrade Log Files" /v "StateFlags0001" /t REG_DWORD /d "2" /f
 start /high CLEANMGR /sagerun:1
-ipconfig /flushdns
