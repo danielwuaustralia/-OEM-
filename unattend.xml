@@ -15,6 +15,29 @@
             <RegisteredOrganization>Weyland-Yutani</RegisteredOrganization>
             <TimeZone>AUS Eastern Standard Time</TimeZone>
             <ProductKey>D764K-2NDRG-47T6Q-P8T8W-YP6DF</ProductKey>
+            <ConfigureChatAutoInstall>false</ConfigureChatAutoInstall>
+        </component>
+        <component name="Microsoft-Windows-IE-ESC" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <IEHardenUser>false</IEHardenUser>
+            <IEHardenAdmin>false</IEHardenAdmin>
+        </component>
+        <component name="Microsoft-Windows-SQMApi" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <CEIPEnabled>0</CEIPEnabled>
+        </component>
+        <component name="Networking-MPSSVC-Svc" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DomainProfile_DisableNotifications>true</DomainProfile_DisableNotifications>
+            <DomainProfile_EnableFirewall>false</DomainProfile_EnableFirewall>
+            <PrivateProfile_DisableNotifications>true</PrivateProfile_DisableNotifications>
+            <DisableStatefulPPTP>true</DisableStatefulPPTP>
+            <PrivateProfile_EnableFirewall>false</PrivateProfile_EnableFirewall>
+            <PublicProfile_EnableFirewall>false</PublicProfile_EnableFirewall>
+            <PublicProfile_DisableNotifications>true</PublicProfile_DisableNotifications>
+            <DomainProfile_LogFile>C:\TEMP\firewall.log</DomainProfile_LogFile>
+            <PrivateProfile_LogFile>C:\TEMP\firewall.log</PrivateProfile_LogFile>
+            <PublicProfile_LogFile>C:\TEMP\firewall.log</PublicProfile_LogFile>
+            <PublicProfile_LogFileSize>1</PublicProfile_LogFileSize>
+            <PrivateProfile_LogFileSize>1</PrivateProfile_LogFileSize>
+            <DomainProfile_LogFileSize>1</DomainProfile_LogFileSize>
         </component>
     </settings>
     <settings pass="oobeSystem">
@@ -119,9 +142,214 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>15</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *App.StepsRecorder* | Remove-WindowsCapability -Online&quot;</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
-                    <CommandLine>cmd.exe /c "C:\TEMP\Setup1.cmd"</CommandLine>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>16</Order>
                     <Description></Description>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *AzureArcSetup* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>17</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *DirectX.Configuration.Database* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>18</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *Downlevel.NLS.Sorting.Versions.Server* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>19</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *MathRecognizer* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>20</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *OpenSSH.Client* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>21</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *OpenSSH.Server* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>22</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *XPS.Viewer* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>23</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *OneCoreUAP.OneSync* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>24</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *Microsoft.Windows.PowerShell.ISE* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>25</Order>
+                    <CommandLine>powershell -noprofile -executionpolicy bypass -command &quot;Get-WindowsCapability -Online | Where-Object Name -like *Print.Management.Console* | Remove-WindowsCapability -Online&quot;</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>26</Order>
+                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:NetFx4 /All /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>27</Order>
+                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:ServerMediaFoundation /All /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>28</Order>
+                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:LegacyComponents /All /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>29</Order>
+                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:DirectPlay /All /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>30</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Xps-Foundation-Xps-Viewer /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>31</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Windows-Defender /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>32</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Printing-PrintToPDFServices-Features /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>33</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Server-Drivers-Printers /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>34</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:WindowsServerBackupSnapin /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>35</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Microsoft-Windows-Printing-PremiumTools /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>36</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:RSAT /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>37</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:FileAndStorage-Services /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>38</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Storage-Services /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>39</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:WorkFolders-Client /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>40</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:SystemDataArchiver /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>41</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:SearchEngine-Client-Package /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>42</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:WindowsAdminCenterSetup /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>43</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Printing-Foundation-Features /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>44</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Printing-Foundation-InternetPrinting-Client /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>45</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Printing-Foundation-LPDPrintService /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>46</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Printing-Foundation-LPRPortMonitor /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>47</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Windows-Defender-ApplicationGuard /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>48</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:Windows-Defender-Default-Definitions /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>49</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /featurename:MSRDC-Infrastructure /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>50</Order>
+                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:C:\TEMP\sxs /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>51</Order>
+                    <CommandLine>dism /english /Online /Remove-DefaultAppAssociations</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>52</Order>
+                    <CommandLine>compact /compactos:never</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>53</Order>
+                    <CommandLine>start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>54</Order>
+                    <CommandLine>start /b /w C:\TEMP\HEU.exe /wts /nologo</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>55</Order>
+                    <CommandLine>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&quot; /v &quot;RunSetup1&quot; /t REG_SZ /d &quot;cmd.exe /c C:\TEMP\Setup1.cmd&quot; /f</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                    <SynchronousCommand wcm:action="add">
+                    <Order>56</Order>
+                    <RequiresUserInput>false</RequiresUserInput>
+                    <CommandLine>shutdown /r /t 5</CommandLine>
                 </SynchronousCommand>
             </FirstLogonCommands>
             <UserAccounts>
@@ -140,12 +368,6 @@
                 <Username>Administrator</Username>
             </AutoLogon>
         </component>
-        <component name="Microsoft-Windows-SecureStartup-FilterDriver" processorArchitecture="amd64" language="neutral" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <PreventDeviceEncryption>true</PreventDeviceEncryption>
-        </component>
-        <component name="Microsoft-Windows-EnhancedStorage-Adm" processorArchitecture="amd64" language="neutral" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <TCGSecurityActivationDisabled>1</TCGSecurityActivationDisabled>
-        </component>
     </settings>
-    <cpi:offlineImage cpi:source="wim:d:/install.wim#Windows 11 专业版" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+    <cpi:offlineImage cpi:source="wim:e:/install.wim#Windows Server 2025 SERVERDATACENTER" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
