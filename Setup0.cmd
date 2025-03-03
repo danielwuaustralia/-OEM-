@@ -1,6 +1,34 @@
 @echo on
 
 rem security
+net stop MsSecCore /y
+net stop wscsvc /y
+net stop WdNisDrv /y
+net stop WdNisSvc /y
+net stop WdFilter /y
+net stop WdBoot /y
+net stop SecurityHealthService /y
+net stop SgrmAgent /y
+net stop SgrmBroker /y
+net stop MsSecFlt /y
+net stop MsSecWfp /y
+net stop WinDefend /y
+sc delete MsSecCore
+sc delete wscsvc
+sc delete WdNisDrv
+sc delete WdNisSvc
+sc delete WdFilter
+sc delete WdBoot
+sc delete SecurityHealthService
+sc delete SgrmAgent
+sc delete SgrmBroker
+sc delete MsSecFlt
+sc delete MsSecWfp
+sc delete WinDefend
+rmdir /s /q "C:\Program Files\Windows Defender"
+rmdir /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows Security Health"
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
@@ -24,10 +52,6 @@ reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHeal
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
-rmdir /s /q "C:\Program Files\Windows Defender"
-rmdir /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
-rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
-rmdir /s /q "C:\ProgramData\Microsoft\Windows Security Health"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Browser\AllowSmartScreen" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
@@ -79,14 +103,16 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\tzautoupdate" /v "Start" /t REG_
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RPSessionInterval" /t REG_DWORD /d "0" /f
 rmdir /s /q "C:\Windows\Web"
+net stop edgeupdate /y
+net stop edgeupdatem /y
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\edgeupdate" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\edgeupdatem" /f
 rmdir /s /q "C:\Windows\System32\Microsoft-Edge-WebView"
 rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge"
 rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeCore"
 rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
 rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
 rmdir /s /q "C:\Program Files\WindowsApps"
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\edgeupdate" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\edgeupdatem" /f
 del /f /q "C:\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"
 del /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
 del /f /q "C:\Users\Public\Desktop\Microsoft Edge.lnk"
