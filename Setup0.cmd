@@ -1,34 +1,23 @@
 @echo on
 
 rem security
-net stop MsSecCore /y
-net stop wscsvc /y
-net stop WdNisDrv /y
-net stop WdNisSvc /y
-net stop WdFilter /y
-net stop WdBoot /y
-net stop SecurityHealthService /y
-net stop SgrmAgent /y
-net stop SgrmBroker /y
-net stop MsSecFlt /y
-net stop MsSecWfp /y
-net stop WinDefend /y
-sc delete MsSecCore
-sc delete wscsvc
-sc delete WdNisDrv
-sc delete WdNisSvc
-sc delete WdFilter
-sc delete WdBoot
-sc delete SecurityHealthService
-sc delete SgrmAgent
-sc delete SgrmBroker
-sc delete MsSecFlt
-sc delete MsSecWfp
-sc delete WinDefend
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecCore" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmAgent" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmBroker" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecFlt" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecWfp" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
 rmdir /s /q "C:\Program Files\Windows Defender"
 rmdir /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows Security Health"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
