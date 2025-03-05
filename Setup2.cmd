@@ -608,7 +608,7 @@ for /f "delims=" %%d in ('powershell -noprofile -c "Get-ChildItem -Path 'HKLM:\S
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase\%%d" /v "DitherRegistryKey" /t REG_BINARY /d "db0100001000000002010104f4000000" /f )
 reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\devmap.inf_amd64_1993197f4612e967\Configurations\devmap_Install\Services\devmap\Parameters" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
 for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /f "DmaRemappingCompatible" ^| find /i "Services\" ') do (
-    reg add "%%a" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
+reg add "%%a" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
 )
 
 :: for /f "skip=2 tokens=2,*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Flighting\Build" /v OSVersion') do (set OSVersion=%%B)
