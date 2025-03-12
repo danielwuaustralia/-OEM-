@@ -1,6 +1,6 @@
 @echo off
 
-start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
+powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\TEMP"
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Windows\Logs"
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\WebCache"
@@ -12,10 +12,8 @@ start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c taskkill /f /im ctfmon.e
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c del /f /q "C:\Windows\System32\ctfmon.exe"
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c taskkill /f /im ChsIME.exe
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
+start /b /w C:\Tools\MinSudo.exe -NoL -TI -P powershell.exe -File "C:\Tools\StartUp.ps1"
 start /b /w cmd /c taskkill /f /im SppExtComObj.Exe
-powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
-powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice -Class @('USB', 'Mouse', 'Keyboard') | Where Status -eq Unknown | ForEach { &pnputil /remove-device $_.InstanceId }"
-powershell -noprofile -executionpolicy bypass -command "Clear-DnsClientCache"
 net stop camsvc /y
 net stop sppsvc /y
 net stop DeviceAssociationService /y
