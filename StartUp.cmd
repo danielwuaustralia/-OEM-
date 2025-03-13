@@ -13,8 +13,9 @@ start /b /w C:\Tools\PowerRun.exe cmd.exe /c del /f /q "C:\Windows\System32\ctfm
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c taskkill /f /im ChsIME.exe
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
 start /b /w C:\Tools\PowerRun.exe powershell.exe -File "C:\Tools\StartUp.ps1"
-start /b /w cmd /c taskkill /f /im SppExtComObj.Exe
+start /b /w cmd /c taskkill /f /im TiWorker.exe
 net stop DeviceAssociationService /y
+net start stornvmeofi
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WmiApRpl\Performance" /v "Disable Performance Counters" /t REG_DWORD /d "1" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\BranchCache" /v "StateFlags0001" /f
