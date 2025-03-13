@@ -249,6 +249,18 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSS2i_I2C_CNL" /v "Start" /t 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSS2i_I2C_GLK" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSSi_GPIO" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSSi_I2C" /v "Start" /t REG_DWORD /d "4" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecCore" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmAgent" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmBroker" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecFlt" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecWfp" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UCPD" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DusmSvc" /f
@@ -492,7 +504,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "ErrorCo
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TokenBroker" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TokenBroker" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\sppsvc" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\camsvc" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\camsvc" /v "Start" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\camsvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AmdAppCompat" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AmdAppCompat" /v "ErrorControl" /t REG_DWORD /d "0" /f
@@ -508,6 +520,14 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "Start" /t REG
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\midisrv" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\midisrv" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\wtd" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\wtd" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\StateRepository" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\StateRepository" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 
 rem MSI Mode
 reg add "HKLM\SYSTEM\CurrentControlSet\Enum\PCI\VEN_1022&DEV_15E3&SUBSYS_A1941458&REV_00\4&16012499&0&0641\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
@@ -548,6 +568,8 @@ reg add "HKLM\SOFTWARE\Classes\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InPr
 reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
 
 rem EXEs
+del /f C:\Windows\System32\drivers\WdBoot.sys
+del /f C:\Windows\System32\drivers\WdFilter.sys
 taskkill /f /im backgroundTaskHost.exe
 ren "C:\Windows\System32\backgroundTaskHost.exe" backgroundTaskHost_old.exe
 ren "C:\Windows\SysWOW64\backgroundTaskHost.exe" backgroundTaskHost_old.exe
@@ -556,11 +578,11 @@ del /f /q "C:\Windows\System32\ctfmon.exe"
 taskkill /f /im TextInputHost.exe
 ren "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" TextInputHost_old.exe
 taskkill /f /im RuntimeBroker.exe
-ren "C:\Windows\System32\RuntimeBroker.exe" RuntimeBroker_old.exe
+rem ren "C:\Windows\System32\RuntimeBroker.exe" RuntimeBroker_old.exe
 taskkill /f /im ShellExperienceHost.exe
-ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" ShellExperienceHost_old.exe
+rem ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" ShellExperienceHost_old.exe
 taskkill /f /im StartMenuExperienceHost.exe
-ren "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" StartMenuExperienceHost_old.exe
+rem ren "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" StartMenuExperienceHost_old.exe
 taskkill /f /im ChsIME.exe
 del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
 taskkill /f /im mobsync.exe
