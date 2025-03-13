@@ -14,8 +14,6 @@ start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c taskkill /f /im ChsIME.e
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P cmd.exe /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
 start /b /w C:\Tools\MinSudo.exe -NoL -TI -P powershell.exe -File "C:\Tools\StartUp.ps1"
 start /b /w cmd /c taskkill /f /im SppExtComObj.Exe
-net stop camsvc /y
-net stop sppsvc /y
 net stop DeviceAssociationService /y
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WmiApRpl\Performance" /v "Disable Performance Counters" /t REG_DWORD /d "1" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
