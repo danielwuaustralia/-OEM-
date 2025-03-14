@@ -501,8 +501,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "Start" 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TokenBroker" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TokenBroker" /v "ErrorControl" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\camsvc" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\camsvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\FileCrypt" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\FileCrypt" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Psched" /v "Start" /t REG_DWORD /d "4" /f
@@ -517,10 +515,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\wtd" /v "Start" /t REG_DWORD /d 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wtd" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker" /v "ErrorControl" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Wcmsvc" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Wcmsvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 
 rem MSI Mode
 reg add "HKLM\SYSTEM\CurrentControlSet\Enum\PCI\VEN_1022&DEV_15E3&SUBSYS_A1941458&REV_00\4&16012499&0&0641\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
@@ -622,17 +616,6 @@ rmdir /s /q "C:\ProgramData\Microsoft\Diagnosis\ETLLogs"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender"
 rmdir /s /q "C:\Windows\System32\sru"
 rmdir /s /q "C:\Windows\SoftwareDistribution"
-reg delete "HKCR\CLSID\{FEEE9C23-C4E2-4A34-8C73-FE8F9786C8B4}" /f
-reg delete "HKCR\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}" /f
-reg delete "HKCR\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}" /f
-reg delete "HKCR\WOW6432Node\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}" /f
-reg delete "HKCR\WOW6432Node\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}" /f
-reg delete "HKLM\SOFTWARE\Classes\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}" /f
-reg delete "HKLM\SOFTWARE\Classes\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}" /f
-reg delete "HKCR\AppID\{45597c98-80f6-4549-84ff-752cf55e2d29}" /f
-reg delete "HKCR\AppID\{ed1d0fdf-4414-470a-a56d-cfb68623fc58}" /f
-reg delete "HKCR\CLSID\{45597c98-80f6-4549-84ff-752cf55e2d29}" /f
-reg delete "HKCR\CLSID\{ed1d0fdf-4414-470a-a56d-cfb68623fc58}" /f
 
 for /f "delims=" %%d in ('powershell -noprofile -c "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase' | Select-Object -ExpandProperty Name | %% { $pathSplit = $_.Split('\'); $displayName = $pathSplit[$pathSplit.Length - 1]; $displayNameSplit = $displayName.Split('_'); if ($displayNameSplit.Length -eq 4) { return $displayName } }"') do (
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase\%%d" /v "DitherRegistryKey" /t REG_BINARY /d "db0100001000000002010104f4000000" /f )
