@@ -2,7 +2,7 @@
 color 0a
 >nul chcp 65001
 
-rem ================================================================================================================================
+rem =====================================================================================================
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iagpio" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iai2c" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaStorAVC" /v "Start" /t REG_DWORD /d "4" /f
@@ -25,8 +25,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08
 netsh wlan add profile filename="C:\TEMP\WiFi.xml" user=all
 netsh wlan set profileparameter name="LV426" connectionmode=auto
 netsh wlan connect name=LV426
-rem start /b /w C:\TEMP\AMD_Chipset_Software.exe /S
-start /b C:\TEMP\NVidiaProfileInspector\nvidiaProfileInspector.exe
 rem ================================================================================================================================
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "C:\TEMP" /f
 reg add "HKCU\Environment" /v "TMP" /t REG_EXPAND_SZ /d "C:\TEMP" /f
@@ -127,11 +125,7 @@ reg add "HKLM\SOFTWARE\Policies\Google\Chrome\ForcedLanguages" /v "1" /t REG_SZ 
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome\ForcedLanguages" /v "2" /t REG_SZ /d "zh-CN" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome\SpellcheckLanguage" /v "1" /t REG_SZ /d "en-US" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Update" /v "AutoUpdateCheckPeriodMinutes" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Google\Update" /v "AutoUpdateCheckPeriodMinutes" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Update" /v "DisableAutoUpdateChecksCheckboxValue" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Google\Update" /v "DisableAutoUpdateChecksCheckboxValue" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Google\Update" /v "UpdateDefault" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Google\Update" /v "UpdateDefault" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\DownloadManager" /v "bHideTabsBtn" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\DownloadManager" /v "bHideSLTabOnDwnlDlg" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\DownloadManager" /v "bHideCTabOnDwnlDlg" /t REG_DWORD /d "1" /f
@@ -814,16 +808,38 @@ reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\Wow6432Node\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
-reg delete "HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\microsoft-edge" /f
-reg delete "HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\microsoft-edge-holographic" /f
-reg delete "HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\ms-eyecontrolspeech" /f
-reg delete "HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\ms-xbl-3d8b930f" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\{1FD49718-1D00-4B19-AF5F-070AF6D5D54C}" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\{1FD49718-1D00-4B19-AF5F-070AF6D5D54C}" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot" /v "AlternateShell" /f
 reg delete "HKCU\System\GameConfigStore\Children" /f
 reg delete "HKCU\System\GameConfigStore\Parents" /f
+reg delete "HKCR\MSEdgeHTM" /f
+reg delete "HKCR\MSEdgeMHT" /f
+reg delete "HKCR\MSEdgePDF" /f
+reg delete "HKCR\WOW6432Node\CLSID\{2E1DD7EF-C12D-4F8E-8AD8-CF8CC265BAD0}" /f
+reg delete "HKCR\WOW6432Node\CLSID\{492E1C30-A1A2-4695-87C8-7A8CAD6F936F}" /f
+reg delete "HKCR\WOW6432Node\CLSID\{77857D02-7A25-4B67-9266-3E122A8F39E4}" /f
+reg delete "HKCR\WOW6432Node\CLSID\{B5977F34-9264-4AC3-9B31-1224827FF6E8}" /f
+reg delete "HKCR\WOW6432Node\CLSID\{D1E8B1A6-32CE-443C-8E2E-EBA90C481353}" /f
+reg delete "HKCR\WOW6432Node\CLSID\{E421557C-0628-43FB-BF2B-7C9F8A4D067C}" /f
+reg delete "HKCR\WOW6432Node\CLSID\{FF419FF9-90BE-4D9F-B410-A789F90E5A7C}" /f
+reg delete "HKLM\SOFTWARE\Classes\.htm\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.html\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.mht\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.mhtml\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.pdf\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.shtml\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.svg\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.webp\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.xht\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.xhtml\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Classes\.xml\OpenWithProgIds" /v "MSEdgeHTM" /f
+reg delete "HKLM\SOFTWARE\Clients\StartMenuInternet\Microsoft Edge" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Internet Explorer\MAIN\EnterpriseMode" /v "MSEdgePath" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Edge" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\EdgeUpdate" /f
+reg delete "HKCR\MediaCenter.WTVFile" /f
 C:\TEMP\svcl.exe /SetVolume "扬声器" 100
 C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 48000
 powershell -noprofile -executionpolicy bypass -command "Disable-MMAgent -MemoryCompression"
