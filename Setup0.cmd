@@ -13,6 +13,8 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecWfp" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
+reg add "HKLM\System\ControlSet001\Control\GraphicsDrivers" /v "IOMMUFlags" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\ControlSet001\Control\GraphicsDrivers" /v "GpuVirtualizationFlags" /t REG_DWORD /d "0" /f
 rmdir /s /q "C:\Program Files\Windows Defender"
 rmdir /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
@@ -26,7 +28,6 @@ reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "FeatureSettingsOverrideMask" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager" /v "ProtectionMode" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\ControlSet001\Control\GraphicsDrivers" /v "IOMMUFlags" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\FVE" /v "DisableExternalDMAUnderLock" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\Main" /v "DEPOff" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f
