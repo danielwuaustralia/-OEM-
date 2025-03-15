@@ -1,6 +1,5 @@
 @echo off
 
-powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\TEMP"
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Windows\Logs"
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\WebCache"
@@ -12,7 +11,7 @@ start /b /w C:\Tools\PowerRun.exe cmd.exe /c taskkill /f /im ctfmon.exe
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c del /f /q "C:\Windows\System32\ctfmon.exe"
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c taskkill /f /im ChsIME.exe
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
-start /b /w C:\Tools\PowerRun.exe powershell.exe -File "C:\Tools\StartUp.ps1"
+start /b /w C:\Tools\PowerRun.exe /SW:2 powershell.exe -File "C:\Tools\StartUp.ps1"
 start /b /w cmd /c taskkill /f /im TiWorker.exe
 net stop DeviceAssociationService /y
 net start stornvmeofi
