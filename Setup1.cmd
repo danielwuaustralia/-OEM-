@@ -445,8 +445,6 @@ bcdedit /set nx OptIn
 bcdedit /deletevalue allowedinmemorysettings
 bcdedit /deletevalue isolatedcontext
 net accounts /maxpwage:unlimited
-powershell -noprofile -executionpolicy bypass -command "New-NetFirewallRule -DisplayName 'Allow All TCP Inbound' -Direction Inbound -Protocol TCP -LocalPort 0-65535 -Action Allow"
-powershell -noprofile -executionpolicy bypass -command "New-NetFirewallRule -DisplayName 'Allow All TCP Inbound' -Direction Inbound -Protocol UDP -LocalPort 0-65535 -Action Allow"
 powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterPowerManagement -Name '*'"
 powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_implat"
 powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_msclient"
@@ -456,15 +454,18 @@ powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBindin
 powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_lldp"
 powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_pacer"
 powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_tcpip6"
+netsh int tcp set security mpp=disabled
+netsh int tcp set security profiles=disabled
+powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName 'Internet' -MemoryPressureProtection Disabled"
+powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName 'Datacenter' -MemoryPressureProtection Disabled"
 netsh int tcp set supplemental Internet congestionprovider=CTCP
 netsh int tcp set supplemental Datacenter congestionprovider=CTCP
 powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName Datacenter -CongestionProvider CTCP"
 powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName Internet -CongestionProvider CTCP"
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t REG_DWORD /d "6" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t REG_DWORD /d "5" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "LocalPriority" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "NetbtPriority" /t REG_DWORD /d "7" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /t REG_SZ /d "1" /f
+powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter Disabled"
+powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -ReceiveSideScaling Disabled"
+powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing Disabled"
+netsh int tcp set global ECN=Enabled
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableSmartNameResolution" /t REG_DWORD /d "1" /f
@@ -473,64 +474,7 @@ reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "Disable
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d "4294967295" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d "10" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableConnectionRateLimiting" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DefaultTTL" /t REG_DWORD /d "64" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /t REG_DWORD /d "65534" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpTimedWaitDelay" /t REG_DWORD /d "30" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DisableTaskOffload" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TMaximumReassemblyHeaders" /t REG_DWORD /d "65535" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /t REG_DWORD /d "1500" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DefaultReceiveWindow" /t REG_DWORD /d "16777216" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DefaultSendWindow" /t REG_DWORD /d "16777216" /f
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -TaskOffload Enabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -Chimney Disabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter Disabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing Disabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -ReceiveSideScaling Enabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -NetworkDirect Enabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetOffloadGlobalSetting -NetworkDirectAcrossIPSubnets Allowed"
-powershell -noprofile -executionpolicy bypass -command "Enable-NetAdapterQos -Name '*'"
-powershell -noprofile -executionpolicy bypass -command "Enable-NetAdapterChecksumOffload -Name '*'"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterRsc -Name '*'"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterUso -Name '*'"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterLso -Name '*'"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterIPsecOffload -Name '*'"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterEncapsulatedPacketTaskOffload -Name '*'"
-netsh int tcp set security mpp=disabled
-netsh int tcp set security profiles=disabled
-powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName 'Internet' -MemoryPressureProtection Disabled"
-powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName 'Datacenter' -MemoryPressureProtection Disabled"
-netsh winsock set autotuning on
-netsh int udp set global uro=disabled
-netsh int tcp set heuristics wsh=enabled forcews=enabled
-netsh int tcp set supplemental internet minrto=300
-netsh int tcp set supplemental internet icw=10
-netsh int tcp set supplemental internet enablecwndrestart=disabled
-netsh int tcp set supplemental internet delayedacktimeout=40
-netsh int tcp set supplemental internet delayedackfrequency=2
-netsh int tcp set supplemental internet rack=enabled
-netsh int tcp set supplemental internet taillossprobe=disabled
-netsh int tcp set global rss=enabled
-netsh int tcp set global autotuninglevel=Normal
-netsh int tcp set global ecncapability=enabled
-netsh int tcp set global timestamps=allowed
-netsh int tcp set global initialrto=1000
-netsh int tcp set global rsc=disabled
-netsh int tcp set global nonsackrttresiliency=Enabled
-netsh int tcp set global maxsynretransmissions=5
-netsh int tcp set global fastopen=enabled
-netsh int tcp set global fastopenfallback=enabled
-netsh int tcp set global hystart=disabled
-netsh int tcp set global prr=disabled
-netsh int tcp set global pacingprofile=initialwindow
-netsh int ip set global loopbacklargemtu=enable
-netsh int ip set global loopbackworkercount=4
-netsh int ip set global loopbackexecutionmode=inline
-netsh int ip set global reassemblylimit=133793216
-netsh int ip set global reassemblyoutoforderlimit=1024
-netsh int ip set global sourceroutingbehavior=drop
-netsh int ip set global sourcebasedecmp=enabled
-netsh int ip set dynamicport tcp start=32769 num=32766
-netsh int ip set dynamicport udp start=32769 num=32766
+powershell -noprofile -executionpolicy bypass -command "Set-NetTCPSetting -SettingName 'Datacenter' -MinRto 300 -DelayedAckTimeoutMs 40"
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\storahci\Parameters\Device" /v "EnableDEVSLP" /t REG_DWORD /d "0" /f
