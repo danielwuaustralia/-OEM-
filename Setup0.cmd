@@ -46,13 +46,15 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "NoDataExecutionP
 reg delete "HKLM\software\policies\microsoft\windows\system" /v "shellsmartscreenlevel" /f
 reg add "HKLM\software\policies\microsoft\windows\system" /v "DisableHHDEP" /t REG_DWORD /d "1" /f
 reg add "HKLM\software\policies\microsoft\windows\system" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\1" /v "2708" /t REG_DWORD /d "3" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
-del /f /q "C:\Windows\System32\smartscreen.exe"
 reg delete "HKCR\AppX9kvz3rdv8t7twanaezbwfcdgrbg3bck0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f
+del /f /q "C:\Windows\System32\smartscreen.exe"
+del /f /q "C:\Windows\System32\drivers\KslD.sys"
 
 rem onedrive
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
@@ -106,6 +108,8 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RP
 rmdir /s /q "C:\Windows\Web"
 rmdir /s /q "C:\Program Files\WindowsApps"
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableRemovePayload" /t REG_DWORD /d "0" /f
+del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
+del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
 
 rem inbox apps
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy" /f
