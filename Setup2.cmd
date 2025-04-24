@@ -254,6 +254,7 @@ reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecFlt" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecWfp" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeBetaElevationService" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UCPD" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DusmSvc" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wercplsupport" /f
@@ -289,6 +290,7 @@ reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService
 powershell -noprofile -executionpolicy bypass -command "Get-ScheduledTask -taskname GoogleUpdate* | Unregister-ScheduledTask -Confirm: $false"
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\stornvmeofi" /v "Start" /t REG_DWORD /d "2" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\CDD" /v "Start" /t REG_DWORD /d "2" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\FileInfo" /v "Start" /t REG_DWORD /d "2" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Wcmsvc" /v "DependOnService" /t REG_MULTI_SZ /d "RpcSs\0NSI" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
