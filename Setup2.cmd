@@ -181,6 +181,53 @@ schtasks /change /tn "Microsoft\Windows\DeviceDirectoryClient\RegisterDevicePeri
 schtasks /change /tn "Microsoft\Windows\Task Manager\Interactive" /disable
 
 rem Services
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecCore" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmAgent" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmBroker" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecFlt" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecWfp" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService138.0.7156.0" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService138.0.7156.0" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UCPD" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DusmSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wercplsupport" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WerSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\lfsvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MapsBroker" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\dmwappushservice" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\pla" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DiagTrack" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdiServiceHost" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdiSystemHost" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wisvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\BITS" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DoSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UsoSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WpnService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wuauserv" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XblAuthManager" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XblGameSave" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\xboxgip" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XboxGipSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UserDataSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\FontCache" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GameInputSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\whesvc" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\3ware" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\ADP80XX" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AmdK8" /v "Start" /t REG_DWORD /d "4" /f
@@ -242,52 +289,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\intelpmax" /v "Start" /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\intelpmax" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\intelpep" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\intelpep" /v "ErrorControl" /t REG_DWORD /d "0" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecCore" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmAgent" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmBroker" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecFlt" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecWfp" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService138.0.7156.0" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService138.0.7156.0" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UCPD" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DusmSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wercplsupport" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WerSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\lfsvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MapsBroker" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\dmwappushservice" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\pla" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DiagTrack" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdiServiceHost" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdiSystemHost" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wisvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\BITS" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\DoSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UsoSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WpnService" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wuauserv" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XblAuthManager" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XblGameSave" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\xboxgip" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XboxGipSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\UserDataSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\FontCache" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GameInputSvc" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /f
 powershell -noprofile -executionpolicy bypass -command "Get-ScheduledTask -taskname GoogleUpdate* | Unregister-ScheduledTask -Confirm: $false"
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\stornvmeofi" /v "Start" /t REG_DWORD /d "2" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\CDD" /v "Start" /t REG_DWORD /d "2" /f
@@ -318,6 +319,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\Processor" /v "Start" /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Processor" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\GpuEnergyDrv" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\hvservice" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\NetBT" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Telemetry" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\BTAGService" /v "Start" /t REG_DWORD /d "4" /f
@@ -522,6 +524,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "Start" /t REG
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\NetworkPrivacyPolicy" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\NetworkPrivacyPolicy" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Schedule" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Schedule" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 
 rem MSI Mode
 reg add "HKLM\SYSTEM\CurrentControlSet\Enum\PCI\VEN_1022&DEV_15E3&SUBSYS_A1941458&REV_00\4&16012499&0&0641\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
@@ -569,6 +577,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\EventLog-System" /
 rem https://www.audiosciencereview.com/forum/index.php?threads/ending-the-windows-audio-quality-debate.19438/page-24#post-1194253
 reg add "HKLM\SOFTWARE\Classes\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
 reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{D69E0717-DD4B-4B25-997A-DA813833B8AC}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
 
 rem EXEs
 del /f C:\Windows\System32\drivers\WdBoot.sys
