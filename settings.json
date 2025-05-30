@@ -7,13 +7,13 @@
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/node_modules/*/**": true, // Enhanced glob for node_modules
+    "**/node_modules/*/**": true,
     "**/.hg/store/**": true,
     "**/bower_components/**": true,
     "**/dist/**": true,
     "**/build/**": true,
-    "**/venv/**": true, // Python virtual environments
-    "**/env/**": true, // Other environment folders
+    "**/venv/**": true,
+    "**/env/**": true,
     "**/*.pyc": true,
     "**/.pytest_cache/**": true,
     "**/.mypy_cache/**": true,
@@ -89,4 +89,10 @@
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.tsserver.web.typeAcquisition.enabled": false,
   "window.restoreWindows": "preserve",
+  "extensions.autoCheckUpdates": false,
+  "update.enableWindowsBackgroundUpdates": false,
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  "workbench.remoteIndicator.showExtensionRecommendations": false,
+  "extensions.ignoreRecommendations": true,
 }
