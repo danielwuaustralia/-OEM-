@@ -12,12 +12,30 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecWfp" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
+rd /s /q "C:\Program Files (x86)\Windows Defender"
+rd /s /q "C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
+rd /s /q "C:\Program Files\Windows Defender"
+rd /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
+rd /s /q "C:\ProgramData\Microsoft\Storage Health"
+rd /s /q "C:\ProgramData\Microsoft\Windows Defender"
+rd /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
+rd /s /q "C:\ProgramData\Microsoft\Windows Security Health"
+rd /s /q "C:\Windows\bcastdvr"
+rd /s /q "C:\Windows\GameBarPresenceWriter"
+rd /s /q "C:\WINDOWS\System32\drivers\wd"
+rd /s /q "C:\Windows\System32\HealthAttestationClient"
+rd /s /q "C:\Windows\System32\SecurityHealth"
+rd /s /q "C:\Windows\System32\Sgrm"
+rd /s /q "C:\Windows\System32\Tasks\Microsoft\Windows\Windows Defender"
+rd /s /q "C:\Windows\System32\Tasks_Migrated\Microsoft\Windows\Windows Defender"
+rd /s /q "C:\Windows\System32\WebThreatDefSvc"
+rd /s /q "C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Defender"
+rd /s /q "C:\Windows\System32\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
+rd /s /q "C:\Windows\SystemApps\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy"
+rd /s /q "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\Defender"
+rd /s /q "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
 reg add "HKLM\System\ControlSet001\Control\GraphicsDrivers" /v "IOMMUFlags" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\GraphicsDrivers" /v "GpuVirtualizationFlags" /t REG_DWORD /d "0" /f
-rmdir /s /q "C:\Program Files\Windows Defender"
-rmdir /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
-rmdir /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
-rmdir /s /q "C:\ProgramData\Microsoft\Windows Security Health"
 reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f
@@ -52,6 +70,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\4" /v "1806" /t REG_DWORD /d "0" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
 reg delete "HKCR\AppX9kvz3rdv8t7twanaezbwfcdgrbg3bck0" /f
+reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
