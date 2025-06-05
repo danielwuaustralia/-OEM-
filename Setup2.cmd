@@ -2,8 +2,6 @@
 color 06
 chcp 65001
 SETLOCAL ENABLEDELAYEDEXPANSION
-SETLOCAL ENABLEEXTENSIONS
-
 rem tasks
 powershell -noprofile -executionpolicy bypass -command "Get-ScheduledTask | Where {$_.TaskName -match 'MicrosoftEdge' } | Unregister-ScheduledTask -Confirm:$false"
 powershell -noprofile -executionpolicy bypass -command "Get-ScheduledTask -taskname GoogleUpdate* | Unregister-ScheduledTask -Confirm: $false"
@@ -601,6 +599,31 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path HKLM
 reg add "HKLM\SOFTWARE\Classes\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
 reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{d69e0717-dd4b-4b25-997a-da813833b8ac}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
 reg add "HKCR\AudioEngine\AudioProcessingObjects\{D69E0717-DD4B-4B25-997A-DA813833B8AC}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{0FA53099-5317-46AF-9376-9A04A4B550F9}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{0FA53099-5317-46AF-9376-9A04A4B550F9}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{0FA53099-5317-46AF-9376-9A04A4B550F9}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{13AB3EBD-137E-4903-9D89-60BE8277FD17}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{13AB3EBD-137E-4903-9D89-60BE8277FD17}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{13AB3EBD-137E-4903-9D89-60BE8277FD17}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{4BE8A061-C73B-4F23-8114-317AAE3E8698}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{4BE8A061-C73B-4F23-8114-317AAE3E8698}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{4BE8A061-C73B-4F23-8114-317AAE3E8698}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{5BBC2C71-DEC2-4BA3-961A-36F37D1CC8A5}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{5BBC2C71-DEC2-4BA3-961A-36F37D1CC8A5}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{5BBC2C71-DEC2-4BA3-961A-36F37D1CC8A5}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{73FB9979-623F-41A6-BF1C-BA817C519C4F}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{73FB9979-623F-41A6-BF1C-BA817C519C4F}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{73FB9979-623F-41A6-BF1C-BA817C519C4F}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{7ECEAD6D-6452-4DED-B567-7BB9947D7669}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{7ECEAD6D-6452-4DED-B567-7BB9947D7669}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{7ECEAD6D-6452-4DED-B567-7BB9947D7669}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{AD37FF4E-B912-49A1-AD03-DF05FB15D908}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{AD37FF4E-B912-49A1-AD03-DF05FB15D908}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{AD37FF4E-B912-49A1-AD03-DF05FB15D908}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{F82EFF51-99FA-4393-A31D-6D5D9F3972C3}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{F82EFF51-99FA-4393-A31D-6D5D9F3972C3}\InProcServer32" /ve /t REG_EXPAND_SZ /d "DISABLED_audioeng.dll" /f
+reg add "HKCR\AudioEngine\AudioProcessingObjects\{F82EFF51-99FA-4393-A31D-6D5D9F3972C3}" /v "APOInterface0" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
+
 
 rem EXEs
 del /f C:\Windows\System32\drivers\WdBoot.sys
