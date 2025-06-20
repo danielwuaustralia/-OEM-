@@ -1,5 +1,9 @@
 @echo on
+setlocal
+call :execute >"C:\Setup0.txt" 2>&1
+exit /b 0
 
+:execute
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecCore" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisDrv" /f
@@ -158,3 +162,4 @@ NarratorQuickStart
 ) DO (
   FOR /F %%a IN ('reg query "%key%" /f %%i /k 2^>nul ^| find /i "InboxApplications"') DO IF NOT ERRORLEVEL 1 (reg delete %%a /f 2>nul)
 )
+exit /b 0
