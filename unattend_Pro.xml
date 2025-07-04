@@ -5,7 +5,7 @@
             <RunSynchronous>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <Path>cmd.exe /c "C:\TEMP\Setup0.cmd"</Path>
+                    <Path>cmd.exe /c C:\TEMP\Setup0.cmd</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
@@ -14,7 +14,7 @@
             <RegisteredOwner>Nostromo</RegisteredOwner>
             <RegisteredOrganization>Weyland-Yutani</RegisteredOrganization>
             <TimeZone>AUS Eastern Standard Time</TimeZone>
-            <ProductKey>DXG7C-N36C4-C4HTG-X4T3X-2YV77</ProductKey>
+            <ProductKey>XGVPP-NMH47-7TTHJ-W3FW7-8HV2C</ProductKey>
             <ConfigureChatAutoInstall>false</ConfigureChatAutoInstall>
         </component>
         <component name="Microsoft-Windows-SQMApi" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -40,7 +40,7 @@
         <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <InputLocale>0409:00000409</InputLocale>
             <SystemLocale>zh-CN</SystemLocale>
-            <UILanguage>zh-CN</UILanguage>
+            <UILanguage>en-US</UILanguage>
             <UserLocale>zh-CN</UserLocale>
         </component>
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -248,7 +248,7 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>37</Order>
-                    <CommandLine>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&quot; /v &quot;1&quot; /t REG_SZ /d &quot;cmd.exe /c C:\TEMP\Setup1.cmd 2&gt;&amp;1 &gt; C:\Setup1.txt&quot; /f</CommandLine>
+                    <CommandLine>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&quot; /v &quot;1&quot; /t REG_SZ /d &quot;cmd.exe /c C:\TEMP\Setup1.cmd&quot; /f</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
@@ -274,5 +274,5 @@
             </AutoLogon>
         </component>
     </settings>
-    <cpi:offlineImage cpi:source="wim:e:/install.wim#Windows 11 专业版" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+    <cpi:offlineImage cpi:source="catalog://d:/install_windows 11 专业版.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
