@@ -1,21 +1,11 @@
 @echo off
 
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\TEMP"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Windows\Logs"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\WebCache"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Windows\System32\LogFiles"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Windows\Performance"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c rmdir /s /q "C:\ProgramData\Microsoft\Diagnosis\ETLLogs"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c taskkill /f /im ctfmon.exe
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c del /f /q "C:\Windows\System32\ctfmon.exe"
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c taskkill /f /im ChsIME.exe
-start /b /w C:\Tools\PowerRun.exe cmd.exe /c del /f /q "C:\Windows\System32\InputMethod\CHS\ChsIME.exe"
-start /b /w C:\Tools\PowerRun.exe /SW:2 powershell.exe -File "C:\Tools\StartUp.ps1"
-start /b /w cmd /c taskkill /f /im TiWorker.exe
-net stop DeviceAssociationService /y
+powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
+powershell -noprofile -executionpolicy bypass -command "(Get-Process -Name dwm).PriorityClass = 'RealTime'"
+start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
+start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA\GLCache"
+start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
 net start stornvmeofi
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WmiApRpl\Performance" /v "Disable Performance Counters" /t REG_DWORD /d "1" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\BranchCache" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Content Indexer Cleaner" /v "StateFlags0001" /f
