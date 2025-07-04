@@ -17,6 +17,7 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecWfp" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
 rd /s /q "C:\Program Files (x86)\Windows Defender"
 rd /s /q "C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
 rd /s /q "C:\Program Files\Windows Defender"
@@ -137,6 +138,5 @@ del /f /q "C:\Windows\System32\spool\drivers\color\sRGB Color Space Profile.icm"
 rmdir /s /q "C:\Program Files\WindowsApps"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Applications" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Applications" /f
-:: powershell -noprofile -executionpolicy bypass -command "'MicrosoftEdge','MicrosoftEdgeDevToolsClient','Win32WebViewHost','XboxGameCallableUI','XGpuEjectDialog','AppRep.ChxApp','CloudExperienceHost','OOBENetworkCaptivePortal','OOBENetworkConnectionFlow','WindowsAppRuntime','Client.AIX','Client.CBS','Client.CoreAI','Client.OOBE','Client.Photon','ContentDeliveryManager','NarratorQuickStart' | ForEach-Object { Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications\*$_*' | Remove-Item -Recurse -Force}"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications' | Where-Object { $_.PSChildName -notmatch 'ShellExperienceHost|StartMenuExperienceHost|Client.CBS|immersivecontrolpanel|PrintDialog|VCLibs' } | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications' | Where-Object { $_.PSChildName -notmatch 'ShellExperienceHost|StartMenuExperienceHost|Client.CBS|immersivecontrolpanel|VCLibs' } | Remove-Item -Recurse -Force"
 exit /b 0
