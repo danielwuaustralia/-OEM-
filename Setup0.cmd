@@ -113,6 +113,8 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableS
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RPSessionInterval" /t REG_DWORD /d "0" /f
 :: extras
 del /f /q "C:\Windows\System32\smartscreen.exe"
+del /f /q "C:\Windows\System32\smartscreen.dll"
+del /f /q "C:\Windows\SysWOW64\smartscreen.dll"
 del /f /q "C:\Windows\System32\drivers\KslD.sys"
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
 reg load "hku\Default" "C:\Users\Default\NTUSER.DAT"
