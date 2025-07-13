@@ -554,6 +554,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\Vid" /v "Start" /t REG_DWORD /d 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Vid" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\FontCache3.0.0.0" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\FontCache3.0.0.0" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\msiserver" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\msiserver" /v "ErrorControl" /t REG_DWORD /d "0" /f
 
 :: enable this for Rockstar Games Launcher
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PcaSvc" /v "Start" /t REG_DWORD /d "4" /f
@@ -637,19 +641,17 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\Windows\WinSxS\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_*_none_*' -Directory | ForEach-Object { Rename-Item -Path (Join-Path -Path $_.FullName -ChildPath 'TiWorker.exe') -NewName 'TiWorker_old.exe' -Force}"
 
 :: remove
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
+powershell -noprofile -executionpolicy bypass -command "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DitherRegistryKey' -Value ([byte[]](0xdb,0x01,0x00,0x00,0x10,0x00,0x00,0x00,0x02,0x00,0x01,0x04,0xf3,0x00,0x00,0x00)) -Type Binary -Force }"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\Windows\SystemApps' -Directory | Where-Object { $_.Name -notin 'Microsoft.UI.Xaml.CBS_8wekyb3d8bbwe', 'Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy', 'ShellExperienceHost_cw5n1h2txyewy' } | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-am-sigs_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-service_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-edge-webview_31bf3856ad364e35_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..ruetype-notoserifsc_31bf3856ad364e35_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..truetype-notosanssc_31bf3856ad364e35_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-onedrive-setup_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
-powershell -noprofile -executionpolicy bypass -command "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DitherRegistryKey' -Value ([byte[]](0xdb,0x01,0x00,0x00,0x10,0x00,0x00,0x00,0x02,0x00,0x01,0x04,0xf3,0x00,0x00,0x00)) -Type Binary -Force }"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\Windows\SystemApps' -Directory | Where-Object { $_.Name -notin 'Microsoft.UI.Xaml.CBS_8wekyb3d8bbwe', 'Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy', 'ShellExperienceHost_cw5n1h2txyewy' } | Remove-Item -Recurse -Force"
-rd /s /q "C:\Program Files (x86)\Microsoft\Edge"
-rd /s /q "C:\Program Files (x86)\Microsoft\EdgeCore"
-rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
-rd /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 rd /s /q "C:\Program Files (x86)\Windows Defender"
 rd /s /q "C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
 rd /s /q "C:\Program Files\Windows Defender"
@@ -669,12 +671,10 @@ rd /s /q "C:\Windows\System32\Tasks_Migrated\Microsoft\Windows\Windows Defender"
 rd /s /q "C:\Windows\System32\WebThreatDefSvc"
 rd /s /q "C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Defender"
 rd /s /q "C:\Windows\System32\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
-rd /s /q "C:\Windows\SystemApps\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy"
 rd /s /q "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\Defender"
 rd /s /q "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
 rd /s /q "C:\Windows\WinSxS\Backup"
-
-:: extras
+rd /s /q "C:\Recovery\WindowsRE"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f
 powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice | Where-Object { $_.FriendlyName -match '高精度事件计时器' } | Disable-PnpDevice -Confirm:$false"
 exit /b 0
