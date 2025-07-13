@@ -98,26 +98,16 @@ reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPoli
 reg add "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile" /v "EnableFirewall" /t REG_DWORD /d "0" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f
 :: microsft edge
-net stop edgeupdate /y
-net stop edgeupdatem /y
-reg delete "HKLM\SYSTEM\ControlSet001\Services\edgeupdate" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\edgeupdatem" /f
 rmdir /s /q "C:\Windows\System32\Microsoft-Edge-WebView"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeCore"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
-del /f /q "C:\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"
-del /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
-del /f /q "C:\Users\Public\Desktop\Microsoft Edge.lnk"
-del /f /q "C:\Windows\System32\MicrosoftEdgeBCHost.exe"
-del /f /q "C:\Windows\System32\MicrosoftEdgeCP.exe"
-del /f /q "C:\Windows\System32\MicrosoftEdgeDevTools.exe"
 rmdir /s /q "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
 :: system restore
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableConfig" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RPSessionInterval" /t REG_DWORD /d "0" /f
+:: User choice
+reg delete "HKLM\SYSTEM\ControlSet001\Services\UCPD" /f
+del /f /q "C:\Windows\System32\UCPDMgr.exe"
+del /f /q "C:\Windows\System32\drivers\UCPD.sys"
 :: extras
 del /f /q "C:\Windows\System32\drivers\KslD.sys"
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
