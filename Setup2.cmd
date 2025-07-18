@@ -558,6 +558,8 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "Start" /t REG_DWORD
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\msiserver" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\msiserver" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\UALSVC" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\UALSVC" /v "ErrorControl" /t REG_DWORD /d "0" /f
 
 :: enable this for Rockstar Games Launcher
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PcaSvc" /v "Start" /t REG_DWORD /d "4" /f
@@ -652,6 +654,11 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\W
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..truetype-notosanssc_31bf3856ad364e35_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-onedrive-setup_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-ie-htmlrendering_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'wow64_microsoft-windows-ie-htmlrendering_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-user-choice-protection_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+net stop EventLog /y
+rd /s /q "C:\Windows\System32\winevt\Logs"
 rd /s /q "C:\Program Files (x86)\Windows Defender"
 rd /s /q "C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
 rd /s /q "C:\Program Files\Windows Defender"
@@ -675,6 +682,8 @@ rd /s /q "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\Defender"
 rd /s /q "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
 rd /s /q "C:\Windows\WinSxS\Backup"
 rd /s /q "C:\Recovery\WindowsRE"
+rd /s /q "C:\Program Files (x86)\Microsoft"
+del /f /q "C:\Windows\System32\edgehtml.dll"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f
 powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice | Where-Object { $_.FriendlyName -match '高精度事件计时器' } | Disable-PnpDevice -Confirm:$false"
 exit /b 0
