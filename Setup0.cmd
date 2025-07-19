@@ -46,6 +46,9 @@ reg add "HKLM\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender" /v "Disa
 reg add "HKLM\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender" /v "ServiceKeepAlive" /t REG_DWORD /d "0" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SPP\Clients" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health" /v "UILockdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Account protection" /v "UILockdown" /t REG_DWORD /d "1" /f
 :: mitagition
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Browser\AllowSmartScreen" /v "value" /t REG_DWORD /d "0" /f
@@ -116,6 +119,8 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RP
 reg delete "HKLM\SYSTEM\ControlSet001\Services\UCPD" /f
 del /f /q "C:\Windows\System32\UCPDMgr.exe"
 del /f /q "C:\Windows\System32\drivers\UCPD.sys"
+:: game user service
+reg delete "HKLM\SYSTEM\ControlSet001\Services\GameInputSvc" /f
 :: extras
 del /f /q "C:\Windows\System32\drivers\KslD.sys"
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
@@ -134,52 +139,11 @@ reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "Start" /t REG_DWORD /d "4" 
 reg add "HKLM\SYSTEM\ControlSet001\Services\swprv" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\W32Time" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\iastorav.inf_amd64_87f761c07c99d5e7\Configurations\iaStorAVC_inst\Services\iaStorAVC\Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\mshdc.inf_amd64_9870462a007a1239\Configurations\msahci_Inst\Services\storahci\Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\iastorav.inf_amd64_87f761c07c99d5e7\Configurations\iaStorAVC_inst\Device\StorPort" /v "EnableIdlePowerManagement" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\mshdc.inf_amd64_9870462a007a1239\Configurations\msahci_Inst\Device\StorPort" /v "EnableIdlePowerManagement" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\uaspstor.inf_amd64_e00537939cf07a86\Configurations\UASPort_Install_Control\Device\StorPort" /v "EnableIdlePowerManagement" /t REG_DWORD /d "0" /f
 rmdir /s /q "C:\Windows\Web"
 del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
 del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
-del /f /q "C:\Windows\System32\spool\drivers\color\RSWOP.icm"
-del /f /q "C:\Windows\System32\spool\drivers\color\sRGB Color Space Profile.icm"
 rmdir /s /q "C:\Program Files\WindowsApps"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Applications" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Applications" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages" /v "Enabled" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\7EE7776C.LinkedInforWindows_w1wdnht996qgy" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Clipchamp.Clipchamp_yxz26nhyzhsrt" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.BingNews_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.BingWeather_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.Copilot_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.GamingApp_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.MediaPlayer_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.OutlookForWindows_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.Paint_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.ScreenSketch_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.Todos_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.Windows.Photos_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.WindowsCalculator_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.WindowsCamera_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.WindowsNotepad_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.Xbox.TCUI_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.XboxIdentityProvider_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.ZuneMusic_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.ZuneVideo_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\MicrosoftTeams_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
-reg delete "HKLM\SOFTWARE\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
-reg delete "HKLM\SOFTWARE\Classes\AppID\{F9717507-6651-4EDB-BFF7-AE615179BCCF}" /f
-reg delete "HKLM\SOFTWARE\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /f
-reg delete "HKLM\SOFTWARE\Classes\CLSID\{057EEE47-2572-4AA1-88D7-60CE2149E33C}" /f
-reg delete "HKLM\SOFTWARE\Classes\CLSID\{BED4D415-7971-4310-AA07-6AC15EA06ACC}" /f
-reg delete "HKLM\SOFTWARE\Classes\CLSID\{c4e82530-3b6e-4f6a-8e99-07426b47d292}" /f
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications' | Where-Object { $_.PSChildName -notmatch 'ShellExperienceHost|StartMenuExperienceHost|Client.CBS|immersivecontrolpanel|VCLibs' } | Remove-Item -Recurse -Force"
 exit /b 0
