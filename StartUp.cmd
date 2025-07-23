@@ -1,9 +1,11 @@
 @echo off
 
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
-powershell -noprofile -executionpolicy bypass -command "(Get-Process -Name dwm).PriorityClass = 'RealTime'"
 start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
 start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA\GLCache"
+start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA\DXCache"
+start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\System32\LogFiles"
+start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\Logs"
 start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
 net start stornvmeofi
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
