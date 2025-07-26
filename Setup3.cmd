@@ -176,19 +176,20 @@ schtasks /change /tn "Microsoft\Windows\Task Manager\Interactive" /disable
 
 :: Services
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecCore" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisDrv" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisSvc" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdFilter" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdBoot" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\SgrmAgent" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecWfp" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecCore" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmAgent" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SgrmBroker" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecFlt" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\MsSecWfp" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\webthreatdefusersvc" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\whesvc" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService138.0.7194.0" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService138.0.7194.0" /f
@@ -633,7 +634,9 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\Windows\WinSxS\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_*_none_*' -Directory | ForEach-Object { Rename-Item -Path (Join-Path -Path $_.FullName -ChildPath 'TiWorker.exe') -NewName 'TiWorker_old.exe' -Force}"
 ::optimize
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f
-powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice | Where-Object { $_.FriendlyName -match '高精度事件计时器' } | Disable-PnpDevice -Confirm:$false"
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "4" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f
+:: powershell -noprofile -executionpolicy bypass -command "Get-PnpDevice | Where-Object { $_.FriendlyName -match '高精度事件计时器' } | Disable-PnpDevice -Confirm:$false"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
 powershell -noprofile -executionpolicy bypass -command "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DitherRegistryKey' -Value ([byte[]](0xdb,0x01,0x00,0x00,0x10,0x00,0x00,0x00,0x02,0x00,0x01,0x04,0xf3,0x00,0x00,0x00)) -Type Binary -Force }"
@@ -642,7 +645,9 @@ del /f C:\Windows\System32\drivers\WdBoot.sys
 del /f C:\Windows\System32\drivers\WdFilter.sys
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\AlternateShells\AvailableShells" /f
 reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EnhancedStorageShell" /f
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..truetype-notosanssc_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-am-sigs_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-senseclient-service_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 rd /s /q "C:\Recovery\WindowsRE"
 rd /s /q "C:\Program Files (x86)\Microsoft"
 exit /b 0
