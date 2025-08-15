@@ -37,22 +37,22 @@ rd /s /q "C:\Program Files (x86)\Windows Defender"
 rd /s /q "C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
 rd /s /q "C:\Program Files\Windows Defender"
 rd /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
-rd /s /q "C:\ProgramData\Microsoft\Storage Health"
 rd /s /q "C:\ProgramData\Microsoft\Windows Defender"
-rd /s /q "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
-rd /s /q "C:\ProgramData\Microsoft\Windows Security Health"
-rd /s /q "C:\Windows\bcastdvr"
-rd /s /q "C:\Windows\GameBarPresenceWriter"
-rd /s /q "C:\WINDOWS\System32\drivers\wd"
-rd /s /q "C:\Windows\System32\HealthAttestationClient"
-rd /s /q "C:\Windows\System32\SecurityHealth"
-rd /s /q "C:\Windows\System32\Sgrm"
 rd /s /q "C:\Windows\System32\Tasks\Microsoft\Windows\Windows Defender"
 rd /s /q "C:\Windows\System32\Tasks_Migrated\Microsoft\Windows\Windows Defender"
+del /f /q "C:\Windows\ELAMBKUP\WdBoot.sys"
+del /f /q "C:\Windows\System32\drivers\msseccore.sys"
+del /f /q "C:\Windows\System32\drivers\WdNisDrv.sys"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-seccoredriver_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-drivers_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-drivers-backup_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-am-sigs_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-senseclient-service_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-service_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 ::smart screen
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security" /v "DisableSecuritySettingsCheck" /t "REG_DWORD" /d "1" /f
+reg add "HKLM\SOFTWARE\Microsoft\Internet Explorer\Download" /v "CheckExeSignatures" /t REG_SZ /d "no" /f
+reg add "HKLM\SOFTWARE\Microsoft\Internet Explorer\Download" /v "RunInvalidSignatures" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows Security Health\State" /v "AppAndBrowser_StoreAppsSmartScreenOff" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
@@ -65,14 +65,8 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
 del /f /q "C:\Windows\System32\smartscreen.exe"
-del /f /q "C:\Windows\System32\smartscreen.dll"
-del /f /q "C:\Windows\SysWOW64\smartscreen.dll"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-smartscreen_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'wow64_microsoft-windows-smartscreen_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
-:: Disable Open File security warning
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security" /v "DisableSecuritySettingsCheck" /t "REG_DWORD" /d "1" /f
-reg add "HKLM\SOFTWARE\Microsoft\Internet Explorer\Download" /v "CheckExeSignatures" /t REG_SZ /d "no" /f
-reg add "HKLM\SOFTWARE\Microsoft\Internet Explorer\Download" /v "RunInvalidSignatures" /t REG_DWORD /d "1" /f
 ::mitagation
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "EnableCfg" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f
@@ -129,28 +123,32 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RP
 reg delete "HKLM\SYSTEM\ControlSet001\Services\UCPD" /f
 del /f /q "C:\Windows\System32\UCPDMgr.exe"
 del /f /q "C:\Windows\System32\drivers\UCPD.sys"
-:: game user service
-reg delete "HKLM\SYSTEM\ControlSet001\Services\GameInputSvc" /f
+del /f /q "C:\Windows\System32\Tasks\Microsoft\Windows\AppxDeploymentClient\UCPD velocity"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-user-choice-protection_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 :: onedrive
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
+rmdir /s /q "C:\Windows\System32\Tasks\Microsoft\OneDrive"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-onedrive-setup_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 :: wallpaper
 rmdir /s /q "C:\Windows\Web"
 :: fonts
 del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
 del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..truetype-notosanssc_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..ruetype-notoserifsc_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 :: modify HKCU
-reg load "hku\Default" "C:\Users\Default\NTUSER.DAT"
-reg add "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
-reg add "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
-reg add "HKEY_USERS\Default\SOFTWARE\Policies\Microsoft\Edge" /v "SmartScreenEnabled" /t REG_DWORD /d "0" /f
-reg add "HKEY_USERS\Default\SOFTWARE\Microsoft\ServerManager" /v "RefreshInterval" /t REG_DWORD /d "14400" /f
-reg add "HKEY_USERS\Default\SOFTWARE\Microsoft\ServerManager" /v "DoNotOpenServerManagerAtLogon" /t REG_DWORD /d "1" /f
-reg add "HKEY_USERS\Default\SOFTWARE\Microsoft\ServerManager" /v "InitializationComplete" /t REG_DWORD /d "1" /f
-reg add "HKEY_USERS\Default\Control Panel\International\Geo" /v "Name" /t REG_SZ /d "CH" /f
-reg add "HKEY_USERS\Default\Control Panel\International\Geo" /v "Nation" /t REG_SZ /d "223" /f
-reg add "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "LowRiskFileTypes" /t REG_SZ /d ".zip;.rar;.nfo;.txt;.exe;.bat;.vbs;.com;.cmd;.reg;.msi;.htm;.html;.gif;.bmp;.jpg;.avi;.mpg;.mpeg;.mov;.mp3;.m3u;.wav;" /f
-reg unload "hku\Default"
+reg load "hku\userhive" "C:\Users\Default\NTUSER.DAT"
+reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
+reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
+reg add "HKEY_USERS\userhive\SOFTWARE\Policies\Microsoft\Edge" /v "SmartScreenEnabled" /t REG_DWORD /d "0" /f
+reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\ServerManager" /v "RefreshInterval" /t REG_DWORD /d "14400" /f
+reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\ServerManager" /v "DoNotOpenServerManagerAtLogon" /t REG_DWORD /d "1" /f
+reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\ServerManager" /v "InitializationComplete" /t REG_DWORD /d "1" /f
+reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "LowRiskFileTypes" /t REG_SZ /d ".zip;.rar;.nfo;.txt;.exe;.bat;.vbs;.com;.cmd;.reg;.msi;.htm;.html;.gif;.bmp;.jpg;.avi;.mpg;.mpeg;.mov;.mp3;.m3u;.wav;" /f
+reg unload "hku\userhive"
+:: region
+reg add "HKEY_USERS\.DEFAULT\Control Panel\International\Geo" /v "Name" /t REG_SZ /d "FR" /f
+reg add "HKEY_USERS\.DEFAULT\Control Panel\International\Geo" /v "Nation" /t REG_SZ /d "84" /f
 :: services
 reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\swprv" /v "Start" /t REG_DWORD /d "4" /f
@@ -176,6 +174,7 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\XblGameSave" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\xboxgip" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\XboxGipSvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\XboxNetApiSvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\GameInputSvc" /f
 :: APPX
 rmdir /s /q "C:\Program Files\WindowsApps"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Applications" /f
