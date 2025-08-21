@@ -40,8 +40,8 @@ reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache
 schtasks /delete /tn "MicrosoftEdgeUpdateTaskMachineCore" /f
 schtasks /delete /tn "MicrosoftEdgeUpdateTaskMachineUA" /f
 schtasks /delete /tn "Microsoft\Windows\Server Manager\CleanupOldPerfLogs" /f
-schtasks /delete /tn "Microsoft\Windows\Software Inventory Logging\Collection" /f
-schtasks /delete /tn "Microsoft\Windows\Software Inventory Logging\Configuration" /f
+schtasks /delete /tn "Microsoft\Windows\SOFTWARE Inventory Logging\Collection" /f
+schtasks /delete /tn "Microsoft\Windows\SOFTWARE Inventory Logging\Configuration" /f
 schtasks /change /tn "Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\PcaPatchDbTask" /disable
 schtasks /change /tn "Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /disable
@@ -124,7 +124,7 @@ schtasks /change /tn "Microsoft\Windows\Sysmain\ResPriStaticDbSync" /disable
 schtasks /change /tn "Microsoft\Windows\ApplicationData\CleanupTemporaryState" /disable
 schtasks /change /tn "Microsoft\Windows\DeviceDirectoryClient\IntegrityCheck" /disable
 schtasks /change /tn "Microsoft\Windows\Active Directory Rights Management Services Client\AD RMS Rights Policy Template Management (Manual)" /disable
-schtasks /change /tn "Microsoft\Windows\Software Inventory Logging\Configuration" /disable
+schtasks /change /tn "Microsoft\Windows\SOFTWARE Inventory Logging\Configuration" /disable
 schtasks /change /tn "Microsoft\Windows\DirectX\DirectXDatabaseUpdater" /disable
 schtasks /change /tn "Microsoft\Windows\DirectX\DXGIAdapterCache" /disable
 schtasks /change /tn "Microsoft\Windows\Server Manager\ServerManager" /disable
@@ -644,8 +644,6 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKL
 
 :: removal
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
-del /f "C:\Windows\System32\drivers\WdBoot.sys"
-del /f "C:\Windows\System32\drivers\WdFilter.sys"
 del /f "C:\Windows\System32\spool\drivers\color\RSWOP.icm"
 del /f "C:\Windows\System32\spool\drivers\color\sRGB Color Space Profile.icm"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\AlternateShells\AvailableShells" /f
