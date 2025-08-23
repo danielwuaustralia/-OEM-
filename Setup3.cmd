@@ -641,6 +641,8 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'Registry:
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
 powershell -noprofile -executionpolicy bypass -command "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(\" \", \"\").Replace(\"`n\", \"\") -ErrorAction SilentlyContinue}"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\State\DisplayDatabase' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DitherRegistryKey' -Value ([byte[]](0xdb,0x01,0x00,0x00,0x10,0x00,0x00,0x00,0x02,0x00,0x01,0x04,0xf3,0x00,0x00,0x00)) -Type Binary -Force }"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Enum\PCI' -Recurse | Where-Object { $_.PSChildName -eq 'DMA Management' } | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'RemappingSupported' -Value 0 -Type DWord -Force}"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Enum\PCI' -Recurse | Where-Object { $_.PSChildName -eq 'DMA Management' } | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'RemappingFlags' -Value 0 -Type DWord -Force}"
 
 :: removal
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
@@ -663,3 +665,5 @@ rd /s /q "C:\Windows\System32\LogFiles"
 rd /s /q "C:\Windows\System32\winevt\Logs"
 rd /s /q "C:\Windows\SystemTemp"
 rd /s /q "C:\Windows\WinSxS\Backup"
+rd /s /q "C:\Windows\System32\SleepStudy"
+del /f "C:\Windows\Logs\CBS\CBS.log"
