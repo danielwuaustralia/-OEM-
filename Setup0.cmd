@@ -18,6 +18,9 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecWfp" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows Advanced Threat Protection" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows Defender" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows Defender Security Center" /f
 rd /s /q "C:\Program Files (x86)\Windows Defender"
 rd /s /q "C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
 rd /s /q "C:\Program Files\Windows Defender"
@@ -42,6 +45,13 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
 del /f /q "C:\Windows\System32\smartscreen.exe"
 del /f /q "C:\Windows\System32\smartscreenps.dll"
+del /f /q "C:\Windows\System32\smartscreen.dll"
+del /f /q "C:\Windows\SysWOW64\smartscreen.exe"
+del /f /q "C:\Windows\SysWOW64\smartscreenps.dll"
+del /f /q "C:\Windows\SysWOW64\smartscreen.dll"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-smartscreen_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-apprep-chxapp.appxmain_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+rmdir /s /q "C:\Windows\SystemApps\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy"
 ::mitagation
 reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t Reg_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "EnableCfg" /t REG_DWORD /d "0" /f
@@ -57,6 +67,7 @@ reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "Mitigatio
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Rpc\SecurityService" /v "DefaultAuthLevel" /t REG_DWORD /d "1" /f
 :: windows update
 reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState" /v "ExcludeWUDrivers" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
@@ -99,6 +110,7 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\UCPD" /f
 del /f /q "C:\Windows\System32\UCPDMgr.exe"
 del /f /q "C:\Windows\System32\drivers\UCPD.sys"
 del /f /q "C:\Windows\System32\Tasks\Microsoft\Windows\AppxDeploymentClient\UCPD velocity"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-user-choice-protection_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 :: onedrive
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
 rmdir /s /q "C:\Windows\System32\Tasks\Microsoft\OneDrive"
@@ -114,7 +126,6 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\W
 reg load "hku\userhive" "C:\Users\Default\NTUSER.DAT"
 reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
 reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
-reg add "HKEY_USERS\userhive\SOFTWARE\Policies\Microsoft\Edge" /v "SmartScreenEnabled" /t REG_DWORD /d "0" /f
 reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\ServerManager" /v "RefreshInterval" /t REG_DWORD /d "14400" /f
 reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\ServerManager" /v "DoNotOpenServerManagerAtLogon" /t REG_DWORD /d "1" /f
 reg add "HKEY_USERS\userhive\SOFTWARE\Microsoft\ServerManager" /v "InitializationComplete" /t REG_DWORD /d "1" /f
@@ -123,7 +134,9 @@ reg unload "hku\userhive"
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "C:\TEMP" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Environment" /v "TMP" /t REG_EXPAND_SZ /d "C:\TEMP" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFirstLogonAnimation" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "EnableFirstLogonAnimation" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableRemovePayload" /t REG_DWORD /d "0" /f
+:: windows services
 reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\swprv" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\W32Time" /v "Start" /t REG_DWORD /d "4" /f
@@ -149,6 +162,8 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\xboxgip" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\XboxGipSvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\XboxNetApiSvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\GameInputSvc" /f
+:: DMA Remapping
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\ControlSet001\Services' -Recurse | Where-Object { $_.PSChildName -eq 'Parameters' } | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DmaRemappingCompatible' -Value 0 -Type DWord -Force}"
 :: APPX
 rmdir /s /q "C:\Program Files\WindowsApps"
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Applications" /f
