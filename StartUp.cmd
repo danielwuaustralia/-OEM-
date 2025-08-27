@@ -1,13 +1,16 @@
 @echo off
 
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
-start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
-start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA\GLCache"
-start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA\DXCache"
-start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\System32\LogFiles"
-start /b /w C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\Logs"
-start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
-net start stornvmeofi
+C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
+C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA"
+C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\System32\LogFiles"
+C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\Logs"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
+net stop lfsvc /y
+net stop NlaSvc /y
+net stop seclogon /y
+rem net start stornvmeofi
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\BranchCache" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Content Indexer Cleaner" /v "StateFlags0001" /f
