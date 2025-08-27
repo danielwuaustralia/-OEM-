@@ -36,9 +36,11 @@
 "workbench.list.smoothScrolling": false,
 "workbench.statusBar.visible": false,
 "workbench.tips.enabled": false,
-"editor.fontSize": 16,
+"editor.fontSize": 18,
 "telemetry.feedback.enabled": false,
 "telemetry.editStats.enabled": false,
 "security.workspace.trust.untrustedFiles": "open",
-"security.workspace.trust.enabled": false
+"security.workspace.trust.enabled": false,
+"workbench.colorTheme": "Visual Studio Dark",
+"extensions.ignoreRecommendations": true
 }
