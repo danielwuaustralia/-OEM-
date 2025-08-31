@@ -108,7 +108,7 @@
                 <SynchronousCommand wcm:action="add">
                     <Order>13</Order>
                     <RequiresUserInput>false</RequiresUserInput>
-                    <CommandLine>C:\TEMP\Redist\DXSETUP.exe /silent</CommandLine>
+                    <CommandLine>C:\TEMP\Redist\DirectX_Redist_Repack_x86_x64.exe /y</CommandLine>
                     <Description></Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
@@ -224,12 +224,18 @@
                     <CommandLine>MsiExec.exe /i C:\TEMP\GoogleChromeStandaloneEnterprise64.msi /qn</CommandLine>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
+                    <Description></Description>
                     <Order>36</Order>
+                    <RequiresUserInput>false</RequiresUserInput>
+                    <CommandLine>C:\TEMP\7zip.exe /S</CommandLine>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>37</Order>
                     <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>37</Order>
+                    <Order>38</Order>
                     <CommandLine>shutdown /r /t 5</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
