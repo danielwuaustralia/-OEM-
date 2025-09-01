@@ -8,11 +8,7 @@ reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache
 :: schtasks /delete /tn "MicrosoftEdgeUpdateTaskMachineCore" /f
 :: schtasks /change /tn "Microsoft\Windows\Diagnosis\Scheduled" /disable
 :: schtasks /end /tn "Microsoft\Windows\Multimedia\SystemSoundsService"
-rd /s /q "C:\Windows\System32\Tasks\Microsoft\Windows\Windows Defender"
 :: Services
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService141.0.7340.0" /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService141.0.7340.0" /f
@@ -100,6 +96,9 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSSi_GPIO" /v "Start" /t REG_
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSSi_GPIO" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSSi_I2C" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\iaLPSSi_I2C" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\DusmSvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wercplsupport" /v "Start" /t REG_DWORD /d "4" /f
@@ -425,6 +424,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\MMCSS" /v "Start" /t REG_DWORD /
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\MMCSS" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SSDPSRV" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Wcmsvc" /v "DependOnService" /t REG_MULTI_SZ /d "RpcSs\0NSI" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "DependOnService" /t REG_MULTI_SZ /d "" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 powershell -noprofile -executionpolicy bypass -command "Set-ItemProperty -Path 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\AarSvc*' -Name 'Start' -Value '4' -Force"
 powershell -noprofile -executionpolicy bypass -command "Set-ItemProperty -Path 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\CDPUserSvc*' -Name 'Start' -Value '4' -Force"
 powershell -noprofile -executionpolicy bypass -command "Set-ItemProperty -Path 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\DevicesFlowUserSvc*' -Name 'Start' -Value '4' -Force"
@@ -533,7 +536,19 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\
 :: removal
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 rd /s /q "C:\DRV"
+rd /s /q "C:\Windows\Panther"
 rd /s /q "C:\Users\Administrator\AppData\Local\Temp"
 rd /s /q "C:\Recovery\WindowsRE"
 rd /s /q "C:\Program Files (x86)\Microsoft"
 rd /s /q "C:\Windows\WinSxS\Temp"
+rd /s /q "C:\ProgramData\Microsoft\Diagnosis\ETLLogs\ShutdownLogger"
+rd /s /q "C:\Windows\System32\LogFiles"
+rd /s /q "C:\Windows\Logs"
+rd /s /q "C:\Windows\System32\WDI\LogFiles"
+rd /s /q "C:\Windows\security\logs"
+rd /s /q "C:\ProgramData\Microsoft\DiagnosticLogCSP\Collectors"
+rd /s /q "C:\Windows\System32\drivers\DriverData\LogFiles\WMI"
+rd /s /q "C:\Windows\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Logs"
+rd /s /q "C:\ProgramData\Microsoft\Windows\wfp"
+rd /s /q "C:\Windows\System32\LogFiles\WMI\RtBackup"
+rd /s /q "C:\Windows\SoftwareDistribution\DataStore\Logs"
