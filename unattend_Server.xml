@@ -14,7 +14,7 @@
             <RegisteredOwner>Nostromo</RegisteredOwner>
             <RegisteredOrganization>Weyland-Yutani</RegisteredOrganization>
             <TimeZone>AUS Eastern Standard Time</TimeZone>
-            <ProductKey>D764K-2NDRG-47T6Q-P8T8W-YP6DF</ProductKey>
+            <ProductKey>2KNJJ-33Y9H-2GXGX-KMQWH-G6H67</ProductKey>
         </component>
     </settings>
     <settings pass="oobeSystem">
@@ -315,12 +315,18 @@
                     <CommandLine>MsiExec.exe /i C:\TEMP\GoogleChromeStandaloneEnterprise64.msi /qn</CommandLine>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
+                    <Description></Description>
                     <Order>54</Order>
+                    <RequiresUserInput>false</RequiresUserInput>
+                    <CommandLine>C:\TEMP\7zip.exe /S</CommandLine>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>55</Order>
                     <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>55</Order>
+                    <Order>56</Order>
                     <CommandLine>shutdown /r /t 5</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
