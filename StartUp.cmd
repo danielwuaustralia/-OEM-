@@ -1,15 +1,10 @@
 @echo off
 
+net stop NVDisplay.ContainerLocalSystem /y
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA"
-C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\System32\LogFiles"
-C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Windows\Logs"
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
-net stop lfsvc /y
-net stop NlaSvc /y
-net stop seclogon /y
+C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "logman stop 'SleepStudyTraceSession' -ets"
 rem net start stornvmeofi
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\BranchCache" /v "StateFlags0001" /f
