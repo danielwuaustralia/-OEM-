@@ -101,6 +101,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODo
 :: telemtry
 reg delete "HKLM\SYSTEM\ControlSet001\Services\dmwappushservice" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\diagnosticshub.standardcollector.service" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\AppID" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\Application Experience" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\AppxDeploymentClient" /f
