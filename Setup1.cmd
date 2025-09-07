@@ -20,4 +20,6 @@ netsh wlan add profile filename="C:\TEMP\WLAN-LV426.xml" user=all
 :: finish
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "1" /t REG_SZ /d "cmd.exe /c C:\TEMP\Setup2.cmd" /f
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+powershell -noprofile -executionpolicy bypass -command "certutil.exe -generateSSTFromWU C:\TEMP\roots.sst"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\TEMP\roots.sst | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root"
 shutdown /r /t 5
