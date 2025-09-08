@@ -544,8 +544,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\DoSvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PlugPlay" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PlugPlay" /v "ErrorControl" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\vdrvroot" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\vdrvroot" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\mpsdrv" /v "Start" /t REG_DWORD /d "4" /f
@@ -554,7 +552,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\UEFI" /v "Start" /t REG_DWORD /d
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\UEFI" /v "ErrorControl" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\mpssvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\mpssvc" /v "ErrorControl" /t REG_DWORD /d "0" /f
-:: reg add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService" /t REG_MULTI_SZ /d "NSI\0RpcSs\0TcpIp\0Dhcp" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\perceptionsimulation" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\perceptionsimulation" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "ErrorControl" /t REG_DWORD /d "0" /f
 
 :: enable for GTA5
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\mssmbios" /v "Start" /t REG_DWORD /d "4" /f
@@ -599,6 +600,66 @@ reg add "HKLM\System\CurrentControlSet\Enum\PCI\VEN_10EC&DEV_C852&SUBSYS_56001A3
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "4" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f
+
+:: ActivatableClassId
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Audio.Interface.Internal.BluetoothAudioAdapter" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Audio.Interface.Internal.BluetoothAudioService" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Audio.Interface.Internal.BluetoothAudioSharingController" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Audio.Interface.Internal.BluetoothAudioSharingParameters" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapAdvertisementPublisher" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapAdvertisementSection" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapAdvertisementSectionsBuilder" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapAdvertisementWatcher" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapRadio" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapRssiFilterConfiguration" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapRssiFilterConstraint" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapRssiFilterConstraintBuilder" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Core.Interface.GapRssiFilterDeviceOptions" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.A2dp.Private.A2dpSinkPlaybackConnection" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Csip.Interface.CsipSetCoordinator" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Gatt.Interface.GattClientDevice" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Gatt.Interface.GattServerFirewall" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Gatt.Interface.GattServerRegistrar" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Gatt.Interface.GattSession" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Hap.Interface.HearingAidContainerService" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Hfp.Internal.HfpHandsFreeDeviceRegistrar" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Profiles.Hfp.Internal.HfpTransportDevice" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Proximity.Interface.DeviceProximityFilterConfiguration" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Proximity.Interface.DeviceProximityFilterConstraint" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.Bluetooth.Proximity.Interface.DeviceProximitySession" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.OneCore.WebThreatDefense.Configuration.WTDUserSettings" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Microsoft.OneCore.WebThreatDefense.Service.UserSessionServiceManager" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\PinEnrollment.PinEnrollmentBroker" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\ProximityConnect.Broker.ProximityConnectBroker" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SensorRuntimeBroker.HumanPresenceSensorExtensionProxy" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.BinarySessionStream" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.DeviceIdentifier" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.InvitationManager" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.Session" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.SessionIdentifier" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.SessionQuery" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\SharingPlatform.SharingPlatform" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Devices.Picker.Internal.MiracastBannerBroker" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Gaming.GameBar.PresenceServer.Internal.PresenceWriter" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.FamilySafety.AppTimeLimits" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.UI.BioEnrollment.DataModel.FullTrustOOBEBioEnrollmentSessionFactory" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.UI.BioEnrollment.DataModel.PerUserBioEnrollmentSessionFactory" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Networking.XboxLive.XboxLiveDeviceAddress" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Networking.XboxLive.XboxLiveEndpointPair" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Networking.XboxLive.XboxLiveEndpointPairTemplate" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Networking.XboxLive.XboxLiveQualityOfServiceMeasurement" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Media.Capture.Internal.GameBarServicesManagerInternal" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.SecurityCenter.SecurityAppBroker" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.SecurityCenter.WscBrokerManager" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.SecurityCenter.WscCloudBackupProvider" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.SecurityCenter.WscDataProtection" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.System.Internal.XboxLive.Auth.AuthManager" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\WindowsUpdate.Internal.AppOffloadSettings" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\WindowsUpdate.Internal.InstallControl" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.CapabilityAccess.UsageHistory.CopilotCapabilityUsageHistory" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Private.Storage.DedupSettings" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Private.Storage.DedupVolume" /v "ActivationType" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\WindowsInternal.SmartActionPlatform.SmartClipboardProxy" /v "ActivationType" /t REG_DWORD /d "0" /f
 
 :: power saving
 powershell -noprofile -executionpolicy bypass -command "'WakeEnabled','WdkSelectiveSuspendEnable' | ForEach-Object { $propName = $_; Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Class' -Recurse | Where-Object { $_.GetValueNames() -contains $propName } | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name $propName -Value 0 -Type DWord -Force } }"
@@ -648,16 +709,23 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\Windows\WinSxS\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_*_none_*' -Directory | ForEach-Object { Rename-Item -Path (Join-Path -Path $_.FullName -ChildPath 'TiWorker.exe') -NewName 'TiWorker_old.exe' -Force}"
 
 :: removal
-reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\WorkFolders" /f
-reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EnhancedStorageShell" /f
-reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\WorkFolders" /f
-reg delete "HKLM\SOFTWARE\Classes\Directory\background\shellex\ContextMenuHandlers\WorkFolders" /f
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\EnhancedStorageShell" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "_wow64cpu" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "_wowarmhw" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "_xtajit" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "wow64" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "wow64base" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "wow64con" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "wow64win" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "xtajit64" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs" /v "xtajit64se" /f
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-fabric-core_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-edge-webview_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-defender-am-sigs_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..ruetype-notoserifsc_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-f..truetype-notosanssc_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-onedrive-setup_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_windows-senseclient-service_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 del /f "C:\Windows\system32\drivers\WdFilter.sys"
 del /f "C:\Windows\system32\drivers\WdBoot.sys"
 del /f "C:\Windows\system32\drivers\msseccore.sys"
@@ -667,4 +735,10 @@ rd /s /q "C:\DRV"
 rd /s /q "C:\Windows\Panther"
 rd /s /q "C:\Recovery\WindowsRE"
 rd /s /q "C:\Program Files (x86)\Microsoft"
+rd /s /q "C:\Windows\Logs"
+rd /s /q "C:\Windows\System32\LogFiles\WMI"
+rd /s /q "C:\Windows\System32\WDI\LogFiles"
+rd /s /q "C:\Windows\System32\WDI"
+rd /s /q "C:\ProgramData\Microsoft\DiagnosticLogCSP"
+rd /s /q "C:\Users\Administrator\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned"
 shutdown /r /t 5
