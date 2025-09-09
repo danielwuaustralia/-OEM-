@@ -135,46 +135,20 @@
                     <Description></Description>
                     <Order>18</Order>
                     <RequiresUserInput>false</RequiresUserInput>
-                    <CommandLine>MsiExec.exe /i C:\TEMP\GoogleChromeStandaloneEnterprise64.msi /qn</CommandLine>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Description></Description>
-                    <Order>19</Order>
-                    <RequiresUserInput>false</RequiresUserInput>
                     <CommandLine>C:\TEMP\7zip.exe /S</CommandLine>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>20</Order>
-                    <CommandLine>reg add &quot;HKCU\Environment&quot; /v &quot;TEMP&quot; /t REG_EXPAND_SZ /d &quot;C:\TEMP&quot; /f</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>21</Order>
-                    <CommandLine>reg add &quot;HKCU\Environment&quot; /v &quot;TMP&quot; /t REG_EXPAND_SZ /d &quot;C:\TEMP&quot; /f</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>22</Order>
-                    <CommandLine>reg add &quot;HKCU\SOFTWARE\Policies\Microsoft\Windows\PowerShell&quot; /v &quot;ExecutionPolicy&quot; /t REG_SZ /d &quot;Unrestricted&quot; /f</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>23</Order>
-                    <CommandLine>reg add &quot;HKCU\SOFTWARE\Policies\Microsoft\Windows\PowerShell&quot; /v &quot;EnableScripts&quot; /t REG_DWORD /d &quot;1&quot; /f</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>24</Order>
+                    <Order>19</Order>
                     <CommandLine>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&quot; /v &quot;1&quot; /t REG_SZ /d &quot;cmd.exe /c C:\TEMP\Setup1.cmd&quot; /f</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>25</Order>
+                    <Order>20</Order>
                     <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>26</Order>
+                    <Order>21</Order>
                     <CommandLine>shutdown /r /t 5</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
