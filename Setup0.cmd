@@ -81,7 +81,6 @@ del /f /q "C:\Windows\System32\UCPDMgr.exe"
 del /f /q "C:\Windows\System32\drivers\UCPD.sys"
 :: onedrive
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
-rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\OneDrive"
 :: wallpaper
 rmdir /s /q "C:\Windows\Web"
 :: fonts
@@ -102,6 +101,10 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODo
 reg delete "HKLM\SYSTEM\ControlSet001\Services\dmwappushservice" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\diagnosticshub.standardcollector.service" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\XblAuthManager" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\XblGameSave" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\XboxGipSvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\XboxNetApiSvc" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\AppID" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\Application Experience" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\AppxDeploymentClient" /f
@@ -179,5 +182,3 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftSto
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\MSTeams_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Clipchamp.Clipchamp_yxz26nhyzhsrt" /v "RemovePackage" /t REG_DWORD /d "1" /f
 rmdir /s /q "C:\Program Files\WindowsApps"
-rmdir /s /q "C:\Windows\bcastdvr"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-media-cap..ternal-broadcastdvr_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
