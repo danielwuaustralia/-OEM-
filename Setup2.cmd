@@ -10,15 +10,12 @@ reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\CEA9B5A7-3514-48AE-
 reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\CEA9B5A7-3514-48AE-9315-4325A45C26C5" /v "RoamingCount" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\CEA9B5A7-3514-48AE-9315-4325A45C26C5" /v "SslClientCertReference" /t REG_SZ /d "MY;User;0000000000000000000000000000000000000000" /f
 reg add "HKLM\SOFTWARE\Microsoft\Provisioning\OMADM\Accounts\CEA9B5A7-3514-48AE-9315-4325A45C26C5" /v "ProtoVer" /t REG_SZ /d "1.2" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "AIModeSettings" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "AutofillPredictionSettings" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "GenAILocalFoundationalModelSettings" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "CreateThemesSettings" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "TabCompareSettings" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "DevToolsGenAiSettings" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "HelpMeWriteSettings" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "HistorySearchSettings" /t REG_DWORD /d "2" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "GeminiSettings" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "LensDesktopNTPSearchEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "LensOverlaySettings" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "LensRegionSearchEnabled" /t REG_DWORD /d "0" /f
@@ -77,23 +74,15 @@ reg add "HKLM\SOFTWARE\Policies\Chromium" /v "WebRtcEventLogCollectionAllowed" /
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "WebRtcTextLogCollectionAllowed" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "PrivacySandboxIpProtectionEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "DefaultPopupsSetting" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "EnableUnsafeSwiftShader" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "PrintingLPACSandboxEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "SandboxExternalProtocolBlocked" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "SideSearchEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "AdditionalDnsQueryTypesEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "BrowserNetworkTimeQueriesEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium" /v "NetworkPredictionOptions" /t REG_DWORD /d "2" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "AutomatedPasswordChangeSettings" /t REG_DWORD /d "2" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "ServiceWorkerAutoPreloadEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "TabGroupSharingSettings" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "LiveCaptionEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "RestrictCoreSharingOnRenderer" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "OriginKeyedProcessesEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium" /v "HappyEyeballsV3Enabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Chromium" /v "SavingBrowserHistoryDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium\ForcedLanguages" /v "1" /t REG_SZ /d "en-US" /f
 reg add "HKLM\SOFTWARE\Policies\Chromium\ForcedLanguages" /v "2" /t REG_SZ /d "zh-CN" /f
-reg add "HKLM\SOFTWARE\Policies\Chromium\LocalNetworkAccessAllowedForUrls" /v "1" /t REG_SZ /d "*" /f
 reg add "HKCU\SOFTWARE\StartIsBack" /v "WinLangID" /t REG_DWORD /d "2052" /f
 reg add "HKCU\SOFTWARE\StartIsBack" /v "WelcomeShown" /t REG_DWORD /d "3" /f
 reg add "HKCU\SOFTWARE\StartIsBack" /v "FrameStyle" /t REG_DWORD /d "2" /f
@@ -330,6 +319,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShellState
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume\{09470096-89bc-449b-aac3-0b6660464205}" /v "NukeOnDelete" /t REG_DWORD /d "1" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume\{7a3643e3-bbe1-41eb-a5de-a88104f8c538}" /v "NukeOnDelete" /t REG_DWORD /d "1" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume\{f9813563-c8ba-46f2-9cfc-a6b076788deb}" /v "NukeOnDelete" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume\{4d1d2a9a-38c3-4a82-83b4-92ff6137c823}" /v "NukeOnDelete" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "LowRiskFileTypes" /t REG_SZ /d ".zip;.rar;.nfo;.txt;.exe;.bat;.vbs;.com;.cmd;.reg;.msi;.htm;.html;.gif;.bmp;.jpg;.avi;.mpg;.mpeg;.mov;.mp3;.m3u;.wav;" /f
@@ -344,6 +334,7 @@ reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start" /v "HideHib
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_PowerButtonAction" /t REG_DWORD /d "2" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowFrequent" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_SearchPrograms" /t REG_DWORD /d "1" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
@@ -441,6 +432,9 @@ reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Drivers32" /v "Mid
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\PenWorkspace" /f
 reg delete "HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
+reg delete "HKCU\System\GameConfigStore\Children" /f
+reg delete "HKCU\System\GameConfigStore\Parents" /f
 :: finish
 C:\TEMP\svcl.exe /SetVolume "扬声器" 100
 C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 96000
