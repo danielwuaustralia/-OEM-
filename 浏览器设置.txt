@@ -1,14 +1,14 @@
 ######################################################## Chrome快捷方式后缀 ########################################################
 
---v8-cache-options=none --disable-gpu-program-cache --disable-gpu-shader-disk-cache --disable-metal-shader-cache --skia-resource-cache-limit-mb=1 --disable-back-forward-cache
+--v8-cache-options=none --skia-font-cache-limit-mb=1 --skia-resource-cache-limit-mb=1 --disable-gpu-program-cache --disable-gpu-shader-disk-cache
 
-################################################## 关闭 #####################################################################
+################################################## flags #####################################################################
 
-optimization guide
+unexpire
 
-################################################## 开启 #####################################################################
+extension manifest
 
-enable-parallel-downloading
+parallel-downloading
 
 Tabstrip Combo Button
 
@@ -16,4 +16,4 @@ chrome://apps/
 
 ##################################################       Steam       ########################################################
 
--forceservice -vrdisable -nofriendsui -no-dwrite -nojoy -noshaders -nodirectcomp -cef-disable-gpu -cef-disable-gpu-sandbox -cef-allow-browser-underlay -cef-delaypageload -cef-force-occlusion -cef-disable-hang-timeouts
+-forceservice -vrdisable -no-dwrite -nojoy -noshaders -nodirectcomp -cef-disable-gpu -cef-disable-gpu-sandbox -cef-allow-browser-underlay -cef-delaypageload -cef-force-occlusion -cef-disable-hang-timeouts
