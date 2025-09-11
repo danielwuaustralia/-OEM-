@@ -19,12 +19,11 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0002" /v "MCCSup" /t REG_SZ /d "0" /f
 netsh wlan add profile filename="C:\TEMP\WLAN-LV426.xml" user=all
 :: finish
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "C:\TEMP" /f
 reg add "HKCU\Environment" /v "TMP" /t REG_EXPAND_SZ /d "C:\TEMP" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "1" /t REG_SZ /d "cmd.exe /c C:\TEMP\Setup2.cmd" /f
-msiexec /i "C:\TEMP\googlechromestandaloneenterprise64.msi" /quiet
 start /b /w C:\TEMP\UpdateTime.exe /U /M
-Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 powershell -noprofile -executionpolicy bypass -command "certutil.exe -generateSSTFromWU C:\TEMP\roots.sst"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\TEMP\roots.sst | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root"
 shutdown /r /t 5
