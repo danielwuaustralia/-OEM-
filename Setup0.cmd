@@ -23,6 +23,8 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisDrv" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisSvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
 ::smart screen
 del /f /q "C:\Windows\System32\smartscreen.exe"
 del /f /q "C:\Windows\System32\smartscreenps.dll"
