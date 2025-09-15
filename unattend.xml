@@ -123,32 +123,67 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>16</Order>
-                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:C:\TEMP\sxs /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>17</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:WorkFolders-Client /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>18</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SmbDirect /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>19</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-PrintToPDFServices-Features /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>20</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SearchEngine-Client-Package /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>21</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-Foundation-Features /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>22</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-Foundation-InternetPrinting-Client /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>23</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:MSRDC-Infrastructure /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>24</Order>
                     <CommandLine>dism /english /Online /Remove-DefaultAppAssociations</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Description></Description>
-                    <Order>18</Order>
+                    <Order>25</Order>
                     <RequiresUserInput>false</RequiresUserInput>
                     <CommandLine>C:\TEMP\7zip.exe /S</CommandLine>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>19</Order>
+                    <Order>26</Order>
                     <CommandLine>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&quot; /v &quot;1&quot; /t REG_SZ /d &quot;cmd.exe /c C:\TEMP\Setup1.cmd&quot; /f</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>20</Order>
+                    <Order>27</Order>
                     <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>21</Order>
+                    <Order>28</Order>
                     <CommandLine>shutdown /r /t 5</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
