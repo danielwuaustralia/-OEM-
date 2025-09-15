@@ -27,5 +27,6 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "1" /t REG_S
 start /b /w C:\TEMP\UpdateTime.exe /U /M
 powershell -noprofile -executionpolicy bypass -command "certutil.exe -generateSSTFromWU C:\TEMP\roots.sst"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\TEMP\roots.sst | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root"
+compact /compactos:never
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 shutdown /r /t 5
