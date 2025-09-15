@@ -309,8 +309,6 @@ reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "DiskCacheSize" /t REG_SZ /d "
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "BlockThirdPartyCookies" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "HappyEyeballsV3Enabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome\LocalNetworkAccessAllowedForUrls" /v "1" /t REG_SZ /d "*" /f
-reg add "HKLM\SOFTWARE\Policies\Google\Chrome\CookiesAllowedForUrls" /v "1" /t REG_SZ /d "[*.]apple.com" /f
-reg add "HKLM\SOFTWARE\Policies\Google\Chrome\CookiesAllowedForUrls" /v "2" /t REG_SZ /d "[*.]icloud.com" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome\ForcedLanguages" /v "1" /t REG_SZ /d "en-US" /f
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome\ForcedLanguages" /v "2" /t REG_SZ /d "zh-CN" /f
 reg add "HKCU\Software\StartIsBack" /v "WinLangID" /t REG_DWORD /d "2052" /f
@@ -339,7 +337,6 @@ bcdedit /set nolowmem Yes
 bcdedit /set allowedinmemorysettings 0x0
 bcdedit /set isolatedcontext No
 bcdedit /set vsmlaunchtype Off
-bcdedit /set vm No
 bcdedit /set x2apicpolicy Enable
 bcdedit /set configaccesspolicy Default
 bcdedit /set MSI Default
@@ -461,6 +458,7 @@ powercfg -x -standby-timeout-dc 0
 powercfg /hibernate off
 fsutil behavior set disable8dot3 1
 fsutil behavior set disablelastaccess 1
+fsutil behavior set encryptpagingfile 0
 net accounts /maxpwage:unlimited
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
@@ -653,6 +651,9 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetu
 reg delete "HKCU\System\GameConfigStore\Children" /f
 reg delete "HKCU\System\GameConfigStore\Parents" /f
 rd /s /q "C:\Users\Administrator\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned"
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService141.0.7376.0" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService141.0.7376.0" /f
 :: finish
 C:\TEMP\svcl.exe /SetVolume "扬声器" 100
 C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 96000
@@ -661,7 +662,4 @@ C:\TEMP\svcl.exe /SetExclusivePriority "扬声器" 0
 start /b /w C:\Tools\DeviceCleanupCmd.exe * -s -n
 move "C:\TEMP\LowAudioLatency.lnk" "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\"
 move "C:\TEMP\StartUp.lnk" "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\"
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService141.0.7376.0" /f
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService141.0.7376.0" /f
 start /b /w C:\Tools\PowerRun.exe cmd.exe /c "C:\TEMP\Setup3.cmd"
