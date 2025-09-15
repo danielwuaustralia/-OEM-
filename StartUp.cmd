@@ -1,7 +1,7 @@
 @echo off
 
-net stop NVDisplay.ContainerLocalSystem /y
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
+net stop NVDisplay.ContainerLocalSystem /y
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA"
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer"
