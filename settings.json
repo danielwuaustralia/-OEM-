@@ -34,13 +34,19 @@
 "workbench.editor.enablePreview": false,
 "workbench.list.horizontalScrolling": false,
 "workbench.list.smoothScrolling": false,
-"workbench.statusBar.visible": false,
 "workbench.tips.enabled": false,
 "editor.fontSize": 18,
 "telemetry.feedback.enabled": false,
 "telemetry.editStats.enabled": false,
 "security.workspace.trust.untrustedFiles": "open",
 "security.workspace.trust.enabled": false,
-"workbench.colorTheme": "Visual Studio Dark",
-"extensions.ignoreRecommendations": true
+"extensions.ignoreRecommendations": true,
+"chat.agent.enabled": false,
+"workbench.localHistory.enabled": false,
+"workbench.editor.historyBasedLanguageDetection": false,
+"search.quickOpen.includeHistory": false,
+"debug.console.historySuggestions": false,
+"terminal.integrated.suggest.upArrowNavigatesHistory": false,
+"task.quickOpen.history": 0,
+"chat.disableAIFeatures": true
 }
