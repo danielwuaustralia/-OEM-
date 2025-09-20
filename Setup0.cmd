@@ -3,22 +3,10 @@
 ::mitagation
 reg add "HKLM\SOFTWARE\Microsoft\Rpc\SecurityService" /v "DefaultAuthLevel" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t Reg_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "EnableCfg" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "MoveImages" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "FeatureSettingsOverrideMask" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager" /v "ProtectionMode" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\ControlSet001\Control\GraphicsDrivers" /v "IOMMUFlags" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v "DisableExternalDMAUnderLock" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
 :: windows update
 reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState" /v "ExcludeWUDrivers" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
@@ -30,20 +18,55 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "Pre
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "DontSearchWindowsUpdate" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "99" /f
-:: extra
-reg add "HKLM\SYSTEM\Microsoft\Windows\CurrentVersion\ReserveManager" /v "MiscPolicyInfo" /t REG_DWORD /d "2" /f
-reg add "HKLM\SYSTEM\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableConfig" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RPSessionInterval" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "ErrorControl" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\ControlSet001\Services\swprv" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\ControlSet001\Services\W32Time" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\ControlSet001\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFirstLogonAnimation" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableRemovePayload" /t REG_DWORD /d "0" /f
+:: defender
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
+reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" /f
+reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" /f
+reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" /f
+rd /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
+rd /s /q "C:\Program Files\Windows Defender"
+rd /s /q "C:\Program Files (x86)\Windows Defender"
+reg delete "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\WdBoot" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\WdFilter" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisDrv" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisSvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecCore" /f
+del /f /q "C:\Windows\System32\drivers\msseccore.sys"
+::smart screen
+del /f /q "C:\Windows\System32\smartscreen.exe"
+del /f /q "C:\Windows\System32\smartscreenps.dll"
+del /f /q "C:\Windows\System32\smartscreen.dll"
+del /f /q "C:\Windows\SysWOW64\smartscreen.exe"
+del /f /q "C:\Windows\SysWOW64\smartscreenps.dll"
+del /f /q "C:\Windows\SysWOW64\smartscreen.dll"
+:: microsft edge
+reg delete "HKLM\SYSTEM\ControlSet001\Services\edgeupdate" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Services\edgeupdatem" /f
+reg delete "HKLM\SOFTWARE\Microsoft\MicrosoftEdge" /f
+rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge"
+rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
+rmdir /s /q "C:\Program Files (x86)\Microsoft"
+rmdir /s /q "C:\Windows\System32\Microsoft-Edge-WebView"
+del /f /q "C:\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"
+del /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
+del /f /q "C:\Users\Public\Desktop\Microsoft Edge.lnk"
+rmdir /s /q "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
+:: User choice
+reg delete "HKLM\SYSTEM\ControlSet001\Services\UCPD" /f
+del /f /q "C:\Windows\System32\UCPDMgr.exe"
+del /f /q "C:\Windows\System32\drivers\UCPD.sys"
+:: onedrive
+del /f /q "C:\Windows\System32\OneDriveSetup.exe"
+:: wallpaper
+rmdir /s /q "C:\Windows\Web"
+:: fonts
+del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
+del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
 :: UWP apps
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages" /v "Enabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx\RemoveDefaultMicrosoftStorePackages\Microsoft.BingNews_8wekyb3d8bbwe" /v "RemovePackage" /t REG_DWORD /d "1" /f
@@ -128,53 +151,24 @@ reg delete "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\CloudExperienceHost
 reg delete "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\Diagtrack-Listener" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\SQMLogger" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\WFP-IPsec Trace" /f
-:: defender
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
-reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" /f
-reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" /f
-reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" /f
-rd /s /q "C:\Program Files\Windows Defender Advanced Threat Protection"
-rd /s /q "C:\Program Files\Windows Defender"
-rd /s /q "C:\Program Files (x86)\Windows Defender"
-reg delete "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdBoot" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdFilter" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisDrv" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WdNisSvc" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
-::smart screen
-del /f /q "C:\Windows\System32\smartscreen.exe"
-del /f /q "C:\Windows\System32\smartscreenps.dll"
-del /f /q "C:\Windows\System32\smartscreen.dll"
-del /f /q "C:\Windows\SysWOW64\smartscreen.exe"
-del /f /q "C:\Windows\SysWOW64\smartscreenps.dll"
-del /f /q "C:\Windows\SysWOW64\smartscreen.dll"
-:: microsft edge
-reg delete "HKLM\SYSTEM\ControlSet001\Services\edgeupdate" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\edgeupdatem" /f
-reg delete "HKLM\SOFTWARE\Microsoft\MicrosoftEdge" /f
-rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge"
-rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeWebView"
-rmdir /s /q "C:\Program Files (x86)\Microsoft"
-rmdir /s /q "C:\Windows\System32\Microsoft-Edge-WebView"
-del /f /q "C:\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"
-del /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
-del /f /q "C:\Users\Public\Desktop\Microsoft Edge.lnk"
-rmdir /s /q "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch"
-:: User choice
-reg delete "HKLM\SYSTEM\ControlSet001\Services\UCPD" /f
-del /f /q "C:\Windows\System32\UCPDMgr.exe"
-del /f /q "C:\Windows\System32\drivers\UCPD.sys"
-:: onedrive
-del /f /q "C:\Windows\System32\OneDriveSetup.exe"
-:: wallpaper
-rmdir /s /q "C:\Windows\Web"
-:: fonts
-del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
-del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
+:: system restore
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableConfig" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "RPSessionInterval" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\VSS" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\swprv" /v "Start" /t REG_DWORD /d "4" /f
+:: https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/registry-entries-for-storport-miniport-drivers
+reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\iastorav.inf_amd64_87f761c07c99d5e7\Configurations\iaStorAVC_inst\Services\iaStorAVC\Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\DriverDatabase\DriverPackages\mshdc.inf_amd64_fc2b0bcb0de5dbe4\Configurations\msahci_Inst\Services\storahci\Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
+:: extra
+reg add "HKLM\SYSTEM\Microsoft\Windows\CurrentVersion\ReserveManager" /v "MiscPolicyInfo" /t REG_DWORD /d "2" /f
+reg add "HKLM\SYSTEM\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\W32Time" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFirstLogonAnimation" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableRemovePayload" /t REG_DWORD /d "0" /f
 :: Prevent System Appx
 set key=HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications
 for %%i in (
