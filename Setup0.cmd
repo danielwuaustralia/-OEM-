@@ -36,7 +36,11 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\MsSecCore" /f
-del /f /q "C:\Windows\System32\drivers\msseccore.sys"
+del /f "C:\Windows\system32\drivers\WdFilter.sys"
+del /f "C:\Windows\system32\drivers\WdBoot.sys"
+del /f "C:\Windows\system32\drivers\msseccore.sys"
+del /f "C:\Windows\system32\drivers\mssecflt.sys"
+del /f "C:\Windows\System32\drivers\WdNisDrv.sys"
 ::smart screen
 del /f /q "C:\Windows\System32\smartscreen.exe"
 del /f /q "C:\Windows\System32\smartscreenps.dll"
