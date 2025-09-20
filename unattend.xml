@@ -185,11 +185,16 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>28</Order>
-                    <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
+                    <CommandLine>compact /CompactOs:always</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>29</Order>
+                    <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>30</Order>
                     <CommandLine>shutdown /r /t 5</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
