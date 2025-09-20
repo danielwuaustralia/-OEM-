@@ -472,6 +472,13 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Ena
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Storage" /v "StorageD3InModernStandby" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device" /v "IdlePowerMode" /t REG_DWORD /d "0" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\PenWorkspace" /f
+reg delete "HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterInternalService141.0.7376.0" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\GoogleUpdaterService141.0.7376.0" /f
 :: finish
 C:\TEMP\svcl.exe /SetVolume "扬声器" 100
 C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 48000
