@@ -68,6 +68,7 @@ del /f /q "C:\Windows\System32\drivers\UCPD.sys"
 del /f /q "C:\Windows\System32\OneDriveSetup.exe"
 :: wallpaper
 rmdir /s /q "C:\Windows\Web"
+rmdir /s /q "C:\Windows\Media"
 :: fonts
 del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
 del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
