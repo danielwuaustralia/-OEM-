@@ -14,7 +14,7 @@
             <RegisteredOwner>Nostromo</RegisteredOwner>
             <RegisteredOrganization>Weyland-Yutani</RegisteredOrganization>
             <TimeZone>AUS Eastern Standard Time</TimeZone>
-            <ProductKey>NPPR9-FWDCX-D2C8J-H872K-2YT43</ProductKey>
+            <ProductKey>2KNJJ-33Y9H-2GXGX-KMQWH-G6H67</ProductKey>
         </component>
     </settings>
     <settings pass="oobeSystem">
@@ -22,7 +22,7 @@
             <InputLocale>0409:00000409</InputLocale>
             <SystemLocale>zh-CN</SystemLocale>
             <UILanguage>en-US</UILanguage>
-            <UserLocale>zh-CN</UserLocale>
+            <UserLocale>en-US</UserLocale>
         </component>
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <OOBE>
@@ -123,83 +123,158 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>16</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:C:\TEMP\sxs /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>17</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:WorkFolders-Client /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-Client /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>18</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SmbDirect /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-Client-Gui /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>19</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-PrintToPDFServices-Features /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SmbDirect /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>20</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SearchEngine-Client-Package /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Windows-Defender /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>21</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-Foundation-Features /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-PrintToPDFServices-Features /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>22</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Printing-Foundation-InternetPrinting-Client /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Server-Drivers-General /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>23</Order>
-                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:MSRDC-Infrastructure /Remove /NoRestart</CommandLine>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Server-Drivers-Printers /Remove /NoRestart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>24</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Server-Gui-Mgmt /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>25</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:WindowsServerBackupSnapin /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>26</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Microsoft-Windows-Printing-PremiumTools /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>27</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:RSAT /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>28</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SystemDataArchiver /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>29</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCoreFonts-NonCritical-Fonts-BitmapFonts /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>30</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCoreFonts-NonCritical-Fonts-MinConsoleFonts /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>31</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCoreFonts-NonCritical-Fonts-Support /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>32</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCoreFonts-NonCritical-Fonts-TrueType /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>33</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCoreFonts-NonCritical-Fonts-UAPFonts /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>34</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:FileAndStorage-Services /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>35</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:Storage-Services /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>36</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCore-Drivers-General /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>37</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:ServerCore-Drivers-General-WOW64 /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>38</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:SearchEngine-Client-Package /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>39</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:WindowsAdminCenterSetup /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>40</Order>
+                    <CommandLine>dism /english /Online /Disable-Feature /FeatureName:WorkFolders-Client /Remove /NoRestart</CommandLine>
+                    <RequiresUserInput>false</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>41</Order>
                     <CommandLine>dism /english /Online /Remove-DefaultAppAssociations</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Description></Description>
-                    <Order>25</Order>
+                    <Order>42</Order>
                     <RequiresUserInput>false</RequiresUserInput>
                     <CommandLine>C:\TEMP\7zip.exe /S</CommandLine>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Description></Description>
-                    <Order>26</Order>
+                    <Order>43</Order>
                     <RequiresUserInput>false</RequiresUserInput>
                     <CommandLine>msiexec /i "C:\TEMP\googlechromestandaloneenterprise64.msi" /quiet</CommandLine>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>27</Order>
+                    <Order>44</Order>
                     <CommandLine>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&quot; /v &quot;1&quot; /t REG_SZ /d &quot;cmd.exe /c C:\TEMP\Setup1.cmd&quot; /f</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>28</Order>
+                    <Order>45</Order>
                     <CommandLine>C:\TEMP\HEU.exe /smart</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <Order>29</Order>
-                    <CommandLine>compact /CompactOs:always</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>30</Order>
-                    <CommandLine>compact /C /S:"C:\Program Files" /A /I /Q && compact /C /S:"C:\Program Files (x86)" /A /I /Q && compact /C /S:"C:\ProgramData" /A /I /Q && compact /C /S:"C:\Users\Administrator\AppData" /A /I /Q && compact /C /S:"C:\Windows" /A /I /Q</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>31</Order>
+                    <Order>46</Order>
                     <CommandLine>shutdown /r /t 5</CommandLine>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
@@ -221,5 +296,5 @@
             </AutoLogon>
         </component>
     </settings>
-    <cpi:offlineImage cpi:source="wim:c:/temp/old.wim#Windows 11 专业版" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+    <cpi:offlineImage cpi:source="wim:c:/temp/install.wim#Windows Server 2025 SERVERDATACENTER" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
