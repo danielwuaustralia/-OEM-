@@ -29,7 +29,7 @@ powercfg -h off
 fsutil behavior set disable8dot3 1
 fsutil behavior set disablelastaccess 1
 net accounts /maxpwage:unlimited
-powershell -noprofile -executionpolicy bypass -command "Get-NetAdapterBinding -Name '*' -IncludeHidden -AllBindings | Where-Object { $_.ComponentID -ne 'ms_tcpip' } | Disable-NetAdapterBinding"
+powershell -noprofile -executionpolicy bypass -command "Get-NetAdapterBinding -Name '*' -AllBindings | Where-Object { $_.ComponentID -ne 'ms_tcpip' } | Disable-NetAdapterBinding"
 netsh int tcp set security mpp=disabled
 netsh int tcp set security profiles=disabled
 netsh int tcp set global rss=enable
@@ -508,6 +508,9 @@ reg add "HKCU\Software\StartIsBack" /v "BottomDetails" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\StartIsBack" /v "TaskbarSpacierIcons" /t REG_DWORD /d "4294967295" /f
 reg add "HKCU\Software\StartIsBack" /v "RestyleIcons" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\StartIsBack" /v "NavBarGlass" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Valve\Steam" /v "DPIScaling" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Valve\Steam" /v "SmoothScrollWebViews" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Valve\Steam" /v "GPUAccelWebViewsV3" /t REG_DWORD /d "0" /f
 start /b C:\TEMP\NotSetup.exe
 reg add "HKCU\AppEvents\Schemes" /ve /t REG_SZ /d ".None" /f
 reg delete "HKCU\AppEvents\Schemes\Apps" /f
