@@ -1,10 +1,10 @@
 @echo off
 
 powershell -noprofile -executionpolicy bypass -command "Set-DisplayRefreshRate -DisplayId 1 -RefreshRate 144"
+net start stornvmeofi
 net stop NVDisplay.ContainerLocalSystem /y
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\TEMP"
 C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\NVIDIA"
-C:\Tools\PowerRun.exe /SW:2 cmd.exe /c rmdir /s /q "C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer"
 rem net start stornvmeofi
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags0001" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\BranchCache" /v "StateFlags0001" /f
