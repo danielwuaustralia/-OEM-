@@ -21,18 +21,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /v "RxReorder_PendTime" /t REG_SZ /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /v "PreferBand" /t REG_SZ /d "3" /f
 netsh wlan add profile filename="C:\TEMP\WLAN-LV426.xml" user=all
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 32768 32768" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 16384 16384" /f
 netsh wlan connect name=LV426
 :: finish
 start /b /w C:\TEMP\UpdateTime.exe /U /M
 powershell -noprofile -executionpolicy bypass -command "certutil.exe -generateSSTFromWU C:\TEMP\roots.sst"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\TEMP\roots.sst | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root"
-compact /CompactOs:always
-compact /C /S:"C:\Program Files" /A /I /Q
-compact /C /S:"C:\Program Files (x86)" /A /I /Q
-compact /C /S:"C:\ProgramData" /A /I /Q
-compact /C /S:"C:\Users\Administrator\AppData" /A /I /Q
-compact /C /S:"C:\Windows" /A /I /Q
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "1" /t REG_SZ /d "cmd.exe /c C:\TEMP\Setup2.cmd" /f
-:: shutdown /r /t 5
+shutdown /r /t 5
