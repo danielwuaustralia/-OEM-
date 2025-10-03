@@ -144,7 +144,6 @@ reg delete "HKLM\SYSTEM\ControlSet001\Services\BcastDVRUserService" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\OneSyncSvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\UnistoreSvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\UserDataSvc" /f
-reg delete "HKLM\SYSTEM\ControlSet001\Services\wscsvc" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\DPS" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Services\WdiServiceHost" /f
