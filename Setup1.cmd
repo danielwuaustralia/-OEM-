@@ -8,13 +8,15 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /v "SupportMACRandom" /t REG_SZ /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /v "RegRoamLevel" /t REG_SZ /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 16384 16384" /f
+:: https://www.techpowerup.com/forums/threads/solidigm-nvme-custom-modded-driver-for-all-nvme-brands-ssds-any-nvme-ssds.327143/
+certutil -f -addstore "Root" "C:\TEMP\ModdedDriver\drivecert.cer"
+certutil -f -addstore "CA" "C:\TEMP\ModdedDriver\drivecert.cer"
+certutil -f -addstore "TrustedPublisher" "C:\TEMP\ModdedDriver\drivecert.cer"
+pnputil /add-driver "C:\TEMP\ModdedDriver\solidnvm.inf" /install
+C:\Windows\System32\devcon.exe updateni "C:\TEMP\ModdedDriver\solidnvm.inf" PCI\CC_010802
 :: finish
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
-compact /CompactOS:always
-compact /C /S:"C:\Program Files" /A /I /Q
-compact /C /S:"C:\Program Files (x86)" /A /I /Q
-compact /C /S:"C:\Windows" /A /I /Q
-compact /C /S:"C:\Users\Administrator" /A /I /Q
+compact /compactos:never
 start /b /w C:\TEMP\UpdateTime.exe /U /M
 powershell -noprofile -executionpolicy bypass -command "certutil.exe -generateSSTFromWU C:\TEMP\roots.sst"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\TEMP\roots.sst | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root"
