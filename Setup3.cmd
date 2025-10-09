@@ -72,11 +72,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device" /v "
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "SleepReliabilityDetailedDiagnostics" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "SleepStudyDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f
 powershell -noprofile -executionpolicy bypass -command "Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{ Enable = $false }"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Enum' -Recurse | ForEach-Object { Get-ItemProperty -Path $_.PSPath | Where-Object { $_.PSObject.Properties.Name -in @('AllowIdleIrpInD3','D3ColdSupported','DeviceSelectiveSuspended','EnableIdlePowerManagement','EnableSelectiveSuspend','EnhancedPowerManagementEnabled','IdleInWorkingState','SelectiveSuspendEnabled','SelectiveSuspendOn','WaitWakeEnabled','WakeEnabled','WdfDirectedPowerTransitionEnable') } | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name $_.PSObject.Properties.Name -Value 0 } }"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Enum' -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $path = $_.PSPath; @('AllowIdleIrpInD3','D3ColdSupported','DeviceSelectiveSuspended','EnableIdlePowerManagement','EnableSelectiveSuspend','EnhancedPowerManagementEnabled','EnabledIdleInWorkingState','SelectiveSuspendEnabled','SelectiveSuspendOn','WaitWakeEnabled','WakeEnabled','WdfDirectedPowerTransitionEnable') | ForEach-Object { if ((Get-ItemProperty -Path $path -Name $_ -ErrorAction SilentlyContinue).$_) { Set-ItemProperty -Path $path -Name $_ -Value 0 -ErrorAction SilentlyContinue } } }"
 :: performance
 bcdedit /set linearaddress57 OptOut
 bcdedit /set increaseuserva 268435328
@@ -135,7 +134,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "vrrDeflickerMarginUs" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "vrrDeflickerMaxUs" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMIntrLockingMode" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMDisablePerIntrDPCQueueing" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableGpuFirmware" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters" /v "MouseDataQueueSize" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "KeyboardDataQueueSize" /t REG_DWORD /d "16" /f
@@ -203,6 +201,8 @@ reg add "HKLM\System\CurrentControlSet\Enum\PCI\VEN_1022&DEV_43F6&SUBSYS_10621B2
 reg add "HKLM\System\CurrentControlSet\Enum\PCI\VEN_1022&DEV_43F7&SUBSYS_11421B21&REV_01\6&2766d23f&0&00600011\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MessageNumberLimit" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Enum\PCI\VEN_10DE&DEV_22BB&SUBSYS_141A196E&REV_A1\4&d0bdf66&0&0109\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MessageNumberLimit" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Enum\PCI\VEN_1CC1&DEV_627A&SUBSYS_627A1CC1&REV_03\4&218bd16b&0&000A\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MessageNumberLimit" /t REG_DWORD /d "1" /f
+reg delete "HKLM\System\CurrentControlSet\Enum\PCI\VEN_1022&DEV_43F6&SUBSYS_10621B21&REV_01\6&3ae87e62&0&00680011\Device Parameters\Interrupt Management\Affinity Policy" /f
+reg delete "HKLM\System\CurrentControlSet\Enum\PCI\VEN_1CC1&DEV_627A&SUBSYS_627A1CC1&REV_03\4&218bd16b&0&000A\Device Parameters\Interrupt Management\Affinity Policy" /f
 :: privacy
 reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "DontSendAdditionalData" /t REG_DWORD /d "1" /f
@@ -608,6 +608,8 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v "ErrorControl" /t RE
 ren "C:\Windows\System32\sysmain.dll" sysmain_old.dll
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\storufs" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\storufs" /v "ErrorControl" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\FileCrypt" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\FileCrypt" /v "ErrorControl" /t REG_DWORD /d "0" /f
 powershell -noprofile -executionpolicy bypass -command "Set-ItemProperty -Path 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\UdkUserSvc*' -Name 'Start' -Value '4' -Force"
 powershell -noprofile -executionpolicy bypass -command "Set-ItemProperty -Path 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\WpnUserService*' -Name 'Start' -Value '4' -Force"
 powershell -noprofile -executionpolicy bypass -command "Set-ItemProperty -Path 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\cbdhsvc*' -Name 'Start' -Value '4' -Force"
