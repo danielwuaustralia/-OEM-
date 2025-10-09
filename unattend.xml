@@ -14,7 +14,7 @@
             <RegisteredOwner>Nostromo</RegisteredOwner>
             <RegisteredOrganization>Weyland-Yutani</RegisteredOrganization>
             <TimeZone>AUS Eastern Standard Time</TimeZone>
-            <ProductKey>NPPR9-FWDCX-D2C8J-H872K-2YT43</ProductKey>
+            <ProductKey>W269N-WFGWX-YVC9B-4J6C9-T83GX</ProductKey>
         </component>
     </settings>
     <settings pass="oobeSystem">
@@ -114,7 +114,7 @@
                 <SynchronousCommand wcm:action="add">
                     <Order>14</Order>
                     <RequiresUserInput>false</RequiresUserInput>
-                    <CommandLine>C:\TEMP\Redist\net_runtime.exe /install /quiet /norestart</CommandLine>
+                    <CommandLine>C:\TEMP\DotNet35Setup.exe /install /quiet /norestart</CommandLine>
                     <Description></Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
