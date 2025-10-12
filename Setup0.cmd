@@ -17,11 +17,11 @@ reg add "HKLM\SYSTEM\ControlSet001\Control\GraphicsDrivers" /v "IOMMUFlags" /t R
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "RunAsPPL" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security" /v "DisableSecuritySettingsCheck" /t "REG_DWORD" /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1806" /t "REG_DWORD" /d "00000000" /f
-reg delete "HKLM\software\policies\microsoft\windows\system" /v "shellsmartscreenlevel" /f
-reg add "HKLM\software\policies\microsoft\windows\system" /v "DisableHHDEP" /t REG_DWORD /d "1" /f
-reg add "HKLM\software\policies\microsoft\windows\system" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
-reg delete "HKLM\software\policies\microsoft\windows defender\smartscreen" /v "configureappinstallcontrol" /f
-reg add "HKLM\software\policies\microsoft\windows defender\smartscreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
+reg delete "HKLM\SOFTWARE\Policies\microsoft\windows\system" /v "shellsmartscreenlevel" /f
+reg add "HKLM\SOFTWARE\Policies\microsoft\windows\system" /v "DisableHHDEP" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\microsoft\windows\system" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
+reg delete "HKLM\SOFTWARE\Policies\microsoft\windows defender\smartscreen" /v "configureappinstallcontrol" /f
+reg add "HKLM\SOFTWARE\Policies\microsoft\windows defender\smartscreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 :: windows update
