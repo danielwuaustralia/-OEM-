@@ -219,7 +219,8 @@ reg add "HKCU\SOFTWARE\Microsoft\DirectX\UserGpuPreferences" /v "DirectXUserGlob
 
 :: finish
 C:\TEMP\svcl.exe /SetVolume "扬声器" 100
-C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 96000
+C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 48000
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
 bcdedit.exe -set loadoptions ENABLE_INTEGRITY_CHECKS
 bcdedit.exe -set TESTSIGNING OFF
 bcdedit.exe -set NOINTEGRITYCHECKS OFF
