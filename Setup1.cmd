@@ -3,7 +3,7 @@
 ::Desktop PC Special
 netsh wlan add profile filename="C:\TEMP\WLAN-LV426.xml" user=all
 powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedProperty -Name '*' -RegistryKeyword 'RegRoamLevel' -RegistryValue 1"
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 49152 49152" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 32768 32768" /f
 netsh wlan connect name=LV426
 :: finish
 compact /compactos:never
