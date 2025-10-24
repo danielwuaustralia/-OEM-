@@ -6,7 +6,6 @@ powershell -noprofile -executionpolicy bypass -command "Set-NetAdapterAdvancedPr
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "c:\pagefile.sys 32768 32768" /f
 netsh wlan connect name=LV426
 :: finish
-powershell -noprofile -executionpolicy bypass -command "Set-WinHomeLocation -GeoId 0x4d"
 compact /compactos:never
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 pause
