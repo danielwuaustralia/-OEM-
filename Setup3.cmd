@@ -22,18 +22,13 @@ powercfg -x -hibernate-timeout-dc 0
 powercfg /h off
 powershell -noprofile -executionpolicy bypass -command "Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{ Enable = $false }"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Enum' -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $path = $_.PSPath; @('AllowIdleIrpInD3','D3ColdSupported','DeviceSelectiveSuspended','EnableIdlePowerManagement','EnableSelectiveSuspend','EnhancedPowerManagementEnabled','EnabledIdleInWorkingState','SelectiveSuspendEnabled','SelectiveSuspendOn','WaitWakeEnabled','WakeEnabled','WdfDirectedPowerTransitionEnable') | ForEach-Object { if ((Get-ItemProperty -Path $path -Name $_ -ErrorAction SilentlyContinue).$_) { Set-ItemProperty -Path $path -Name $_ -Value 0 -ErrorAction SilentlyContinue } } }"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_lldp"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_lltdio"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_implat"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_tcpip6"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_rspndr"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_server"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterBinding -Name '*' -ComponentID ms_msclient"
-powershell -noprofile -executionpolicy bypass -command "Disable-NetAdapterPowerManagement -Name '*'"
+powershell -noprofile -executionpolicy bypass -command "ForEach($nic in Get-NetAdapter){Disable-NetAdapterPowerManagement -Name $nic.Name}"
 netsh int tcp set security profiles=disabled
 netsh int tcp set global autotuninglevel=experimental
 netsh int tcp set supplemental Internet congestionprovider=NewReno
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles' -Depth 2 -Recurse | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'Category' -Type 'DWord' -Value '1' -Force}"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces' -Depth 2 -Recurse | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'TcpAckFrequency' -Type 'DWord' -Value '1' -Force}"
+powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'Registry::HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces' -Depth 2 -Recurse | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'TcpNoDelay' -Type 'DWord' -Value '1' -Force}"
 powershell -noprofile -executionpolicy bypass -command "Get-NetAdapter -IncludeHidden | Set-NetIPInterface -WeakHostSend Enabled -WeakHostReceive Enabled -ErrorAction SilentlyContinue"
 bcdedit /set disabledynamictick Yes
 fsutil behavior set disable8dot3 1
