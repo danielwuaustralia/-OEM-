@@ -204,6 +204,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMIntrLockingMode" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableGpuFirmware" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Task Scheduler\Maintenance" /v "WakeUp" /t REG_DWORD /d "0" /f
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Services' | Foreach-Object { if ($null -ne (Get-ItemProperty -Path """Registry::$_""" -EA 0).Start) { Set-ItemProperty -Path """Registry::$_""" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 }}"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Enum' -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $path = $_.PSPath; @('RemappingSupported','RemappingFlags') | ForEach-Object { if ((Get-ItemProperty -Path $path -Name $_ -ErrorAction SilentlyContinue).$_) { Set-ItemProperty -Path $path -Name $_ -Value 0 -ErrorAction SilentlyContinue } } }"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Services' -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $path = $_.PSPath; @('IoLatencyCap','DmaRemappingCompatible','EnableDIPM','EnableHIPM') | ForEach-Object { if ((Get-ItemProperty -Path $path -Name $_ -ErrorAction SilentlyContinue).$_) { Set-ItemProperty -Path $path -Name $_ -Value 0 -ErrorAction SilentlyContinue } } }"
@@ -503,6 +504,7 @@ powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\W
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\Windows\WinSxS -Filter 'amd64_microsoft-windows-user-choice-protection_31bf3856ad364e35_*_none_*' -Directory | Remove-Item -Recurse -Force"
 rd /s /q "C:\Windows\Prefetch"
 rd /s /q "C:\Windows\Logs"
+rd /s /q "C:\DRV"
 
 :: Wof = "Start" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\FileInfo" /v "Start" /t REG_DWORD /d "0" /f
