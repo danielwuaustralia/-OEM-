@@ -92,9 +92,6 @@ del /f /q "C:\Windows\System32\OneDriveSetup.exe"
 rmdir /s /q "C:\Windows\Web"
 rmdir /s /q "C:\Windows\Media"
 
-:: inbox apps
-rmdir /s /q "C:\Windows\InboxApps"
-
 :: fonts
 del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
 del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
@@ -149,6 +146,7 @@ reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\UpdateOrchestrator" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\Windows\WaaSMedic" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Microsoft\XblGameSave" /f
+rmdir /s /q "C:\Windows\InboxApps"
 set key=HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications
 for %%i in (
 Microsoft.Windows.AppRep.ChxApp
