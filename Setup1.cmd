@@ -1,4 +1,5 @@
 @echo on
+chcp 65001
 
 :: Desktop PC Special
 netsh wlan add profile filename="C:\TEMP\WLAN-LV426.xml" user=all
@@ -19,4 +20,6 @@ pause
 powershell -noprofile -executionpolicy bypass -command "certutil.exe -generateSSTFromWU C:\TEMP\roots.sst"
 powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path C:\TEMP\roots.sst | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root"
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "1" /t REG_SZ /d "cmd.exe /c C:\TEMP\Setup2.cmd" /f
+C:\TEMP\svcl.exe /SetVolume "扬声器" 100
+C:\TEMP\svcl.exe /SetDefaultFormat "扬声器" 24 48000
 shutdown /r /t 5
