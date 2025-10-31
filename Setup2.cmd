@@ -148,6 +148,12 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "
 reg add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9012038010000000" /f
 reg add "HKCU\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d "0" /f
 reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" /t REG_SZ /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1" /v "ClearTypeLevel" /t REG_DWORD /d "100" /f
+reg add "HKCU\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1" /v "EnhancedContrastLevel" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1" /v "GammaLevel" /t REG_DWORD /d "1600" /f
+reg add "HKCU\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1" /v "GrayscaleEnhancedContrastLevel" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1" /v "PixelStructure" /t REG_DWORD /d "1" /f
+reg add "HKCU\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1" /v "TextContrastLevel" /t REG_DWORD /d "6" /f
 
 :: file explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" /v "SavedLegacySettings" /t REG_BINARY /d "4600000003000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" /f
@@ -209,8 +215,6 @@ reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\B
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_SZ /d "1" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /t REG_SZ /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1806" /t REG_DWORD /d "0" /f
-
-:: game mode
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "1" /f
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f
 reg add "HKCU\System\GameConfigStore" /v "Win32_AutoGameModeDefaultProfile" /t REG_BINARY /d "01000100000000000000000000000000000000000000000000000000000000000000000000000000" /f
