@@ -94,10 +94,6 @@ rmdir /s /q "C:\Windows\Media"
 :: fonts
 del /f /q "C:\Windows\Fonts\NotoSansSC-VF.ttf"
 del /f /q "C:\Windows\Fonts\NotoSerifSC-VF.ttf"
-powershell -noprofile -executionpolicy bypass -command "Get-ChildItem -Path 'C:\Windows\Fonts' -Exclude 'segoe*.*', 'tahoma*.*', 'marlett.ttf', '8541oem.fon', 'segui*.*', 'consol*.*', 'lucon*.*', 'calibri*.*', 'arial*.*', 'times*.*', 'cou*.*', '8*.*', 'msyh*' | Remove-Item -Recurse -Force"
-
-:: arc setup
-rd /s /q "C:\Windows\AzureArcSetup"
 
 :: time sync
 reg add "HKLM\SYSTEM\ControlSet001\Services\W32Time" /v "Start" /t REG_DWORD /d "4" /f
